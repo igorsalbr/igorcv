@@ -41,24 +41,16 @@ export default function Component() {
       question: "What's the ID of the hidden element?",
       correctAnswer: "salsal"
     },
+    // {
+    //   id: 4,
+    //   title: "Invisible Button Clickathon",
+    //   completed: false,
+    //   description: "There are three invisible buttons on the page",
+    //   question: "In what order should the buttons be clicked? (123)",
+    //   correctAnswer: "213"
+    // },
     {
       id: 3,
-      title: "Button ID Quest",
-      completed: false,
-      description: "Find the ID of a specific button on the page",
-      question: "What's the ID of the red button?",
-      correctAnswer: "dangerButton"
-    },
-    {
-      id: 4,
-      title: "Invisible Button Clickathon",
-      completed: false,
-      description: "There are three invisible buttons on the page",
-      question: "In what order should the buttons be clicked? (123)",
-      correctAnswer: "213"
-    },
-    {
-      id: 5,
       title: "Console Hacker",
       completed: false,
       description: "Use the browser console to interact with a hidden function",
@@ -66,7 +58,7 @@ export default function Component() {
       correctAnswer: "h4ck3r"
     },
     {
-      id: 6,
+      id: 4,
       title: "SQL Injection Simulation",
       completed: false,
       description:
@@ -75,28 +67,29 @@ export default function Component() {
       correctAnswer: "' OR '1'='1"
     },
     {
-      id: 7,
+      id: 5,
       title: "Cryptography Challenge",
       completed: false,
       description: "Decrypt a message using a given cipher",
       question: "Decrypt: Khoor Zruog! What's the original message?",
       correctAnswer: "Hello World!"
     },
+    // {
+    //   id: 6,
+    //   title: "RegEx Riddle",
+    //   completed: false,
+    //   description: "Create a regular expression to match a specific pattern",
+    //   question: "Write a RegEx to match all valid email addresses",
+    //   correctAnswer: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    // },
     {
-      id: 8,
-      title: "RegEx Riddle",
-      completed: false,
-      description: "Create a regular expression to match a specific pattern",
-      question: "Write a RegEx to match all valid email addresses",
-      correctAnswer: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
-    },
-    {
-      id: 9,
+      id: 6,
       title: "JWT Decoder",
       completed: false,
       description: "Decode a JSON Web Token to find a hidden message",
-      question: "What's the 'secret' claim in the decoded JWT?",
-      correctAnswer: "youreahacker"
+      question:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJzZWNyZXQiOiJvaWUifQ.55ja5RWqJJo4ZrsMDOxQXjWQhQsvgIx1AjTqFMbnJus",
+      correctAnswer: "oie"
     }
   ]);
 
@@ -146,100 +139,100 @@ export default function Component() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between px-4 sm:px-12 md:px-24">
-      <div className="min-h-screen bg-gray-100 text-gray-900 ">
-        <header className="sticky top-0 z-10 bg-[#FFF]">
-          <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-6 lg:px-4">
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      <header className="sticky top-0 z-10 bg-[#FFF] border-b border-[#aaa] w-full outset-1 ">
+        <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-6 lg:px-4">
+          <Link
+            href="#"
+            className="flex items-center pr-2 text-lg font-semibold"
+            prefetch={false}
+          >
+            <span>
+              <div className="icon-container flex items-center flex-row">
+                <div>Stack: &nbsp;</div>
+                <img
+                  className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
+                  src="go.png"
+                  alt="GO"
+                />
+                <img
+                  className={icon == 1 ? "flex w-12 md:w-16" : "hidden"}
+                  src="ts.png"
+                  alt="TypeScript"
+                />
+                <img
+                  className={icon == 2 ? "flex w-14 md:w-[72px]" : "hidden"}
+                  src="react.png"
+                  alt="React.js"
+                />
+                <img
+                  className={icon == 3 ? "flex w-14 md:w-[72px]" : "hidden"}
+                  src="py.png"
+                  alt="Python"
+                />
+                <img
+                  className={icon == 4 ? "flex w-16 md:w-20" : "hidden"}
+                  src="next.svg"
+                  alt="Next"
+                />
+                <img
+                  className={icon == 5 ? "flex w-16 md:w-20" : "hidden"}
+                  src="retool.png"
+                  alt="Retool"
+                />
+                <img
+                  className={icon == 6 ? "flex w-10 md:w-16" : "hidden"}
+                  src="bubble.png"
+                  alt="Bubble"
+                />
+              </div>
+            </span>
+          </Link>
+          <nav className="hidden sm:flex ml-auto items-center gap-1 sm:gap-2 lg:gap-4">
             <Link
-              href="#"
-              className="flex items-center pr-2 text-lg font-semibold"
+              href="/#about"
+              className="text-sm font-medium md:text-[16px] hover:underline"
               prefetch={false}
             >
-              <span>
-                <div className="icon-container flex items-center flex-row">
-                  <div>Stack: &nbsp;</div>
-                  <img
-                    className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
-                    src="go.png"
-                    alt="GO"
-                  />
-                  <img
-                    className={icon == 1 ? "flex w-12 md:w-16" : "hidden"}
-                    src="ts.png"
-                    alt="TypeScript"
-                  />
-                  <img
-                    className={icon == 2 ? "flex w-14 md:w-[72px]" : "hidden"}
-                    src="react.png"
-                    alt="React.js"
-                  />
-                  <img
-                    className={icon == 3 ? "flex w-14 md:w-[72px]" : "hidden"}
-                    src="py.png"
-                    alt="Python"
-                  />
-                  <img
-                    className={icon == 4 ? "flex w-16 md:w-20" : "hidden"}
-                    src="next.svg"
-                    alt="Next"
-                  />
-                  <img
-                    className={icon == 5 ? "flex w-16 md:w-20" : "hidden"}
-                    src="retool.png"
-                    alt="Retool"
-                  />
-                  <img
-                    className={icon == 6 ? "flex w-10 md:w-16" : "hidden"}
-                    src="bubble.png"
-                    alt="Bubble"
-                  />
-                </div>
-              </span>
+              About
             </Link>
-            <nav className="hidden sm:flex ml-auto items-center gap-1 sm:gap-2 lg:gap-4">
-              <Link
-                href="/#about"
-                className="text-sm font-medium md:text-[16px] hover:underline"
-                prefetch={false}
-              >
-                About
-              </Link>
-              <Link
-                href="/#skills"
-                className="text-sm md:text-[16px] font-medium hover:underline"
-                prefetch={false}
-              >
-                Skills
-              </Link>
-              <Link
-                href="/#projects"
-                className="text-sm md:text-[16px] font-medium hover:underline"
-                prefetch={false}
-              >
-                Projects
-              </Link>
-              <Link
-                href="/"
-                className="text-sm md:text-[16px] font-medium hover:underline"
-                prefetch={false}
-              >
-                Home
-              </Link>
-              <Link
-                href="/#contact"
-                className="text-sm md:text-[16px] font-medium hover:underline"
-                prefetch={false}
-              >
-                Contact
-              </Link>
-            </nav>
-            <Link href={"/"} className="sm:hidden">
+            <Link
+              href="/#skills"
+              className="text-sm md:text-[16px] font-medium hover:underline"
+              prefetch={false}
+            >
+              Skills
+            </Link>
+            <Link
+              href="/#projects"
+              className="text-sm md:text-[16px] font-medium hover:underline"
+              prefetch={false}
+            >
+              Projects
+            </Link>
+            <Link
+              href="/#contact"
+              className="text-sm md:text-[16px] font-medium hover:underline"
+              prefetch={false}
+            >
+              Contact
+            </Link>
+            <Link
+              href="/"
+              className="text-sm md:text-[16px] font-medium hover:underline"
+              prefetch={false}
+            >
               Home
             </Link>
-          </div>
-        </header>
+          </nav>
+          <Link href={"/"} className="sm:hidden">
+            Home
+          </Link>
+        </div>
+      </header>
+      <div className="min-h-screen bg-gray-100 text-gray-900 px-4 sm:px-12 md:px-24">
         <Progress value={progress} />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-12 max-w-6xl ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-12 mt-8 px-12 max-w-6xl ">
           {challenges.map((challenge) => (
             <Card key={challenge.id}>
               <CardHeader>
@@ -265,6 +258,15 @@ export default function Component() {
             </Card>
           ))}
         </div>
+        <footer className="flex flex-col items-center justify-center mt-8">
+          <Link
+            href={"https://mpago.la/1ozZqt4"}
+            className="text-gray-700 text-center underline"
+            target="_blank"
+          >
+            Cafézin?
+          </Link>
+        </footer>
 
         <Dialog open={openModal !== null} onOpenChange={closeChallenge}>
           <DialogContent>
@@ -276,12 +278,11 @@ export default function Component() {
                 {challenges.find((c) => c.id === openModal)?.description}
               </DialogDescription>
             </DialogHeader>
-            <div className="py-4">
-              <Label
-                htmlFor="answer"
-                className="text-lg font-semibold block mb-2"
-              >
-                {challenges.find((c) => c.id === openModal)?.question}
+            <div className="py-4 px-5">
+              <Label htmlFor="answer" className="text-lg">
+                <div className="mb-4 max-w-[90%] overflow-y-scroll">
+                  {challenges.find((c) => c.id === openModal)?.question}
+                </div>
               </Label>
               <Input
                 id="answer"
@@ -394,11 +395,11 @@ const DialogTitle = ({ children }: any) => (
 );
 
 const DialogDescription = ({ children }: any) => (
-  <p className="mt-2 text-sm text-gray-500">{children}</p>
+  <p className="mt-2 text-sm text-[#777]">{children}</p>
 );
 
 const DialogFooter = ({ children }: any) => (
-  <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+  <div className="flex items-center justify-end p-6 border-t border-solid border-[#eee] rounded-b">
     {children}
   </div>
 );
