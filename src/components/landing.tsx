@@ -116,12 +116,12 @@ export function Landing() {
           id="hero"
           className="container mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12"
         >
-          <h1 className="text-xl font-bold tracking-tighter sm:text-3xl mt-4 lg:text-4xl">
-            Hello, my name is Igor! 👋
+          <h1 className="text-2xl font-bold tracking-tighter sm:text-5xl lg:text-6xl mt-4">
+            Hello, my name is Igor!
           </h1>
           <img src="/igor.png" className="max-w-[40%] mt-4" />
           <div className="space-y-4 text-center">
-            <h1 className="text-2xl font-bold tracking-tighter sm:text-5xl lg:text-6xl">
+            <h1 className="text-xl font-bold tracking-tighter sm:text-2xl lg:text-4xl">
               Welcome to a little piece of my mind. 🧠
             </h1>
             <div className="flex-row flex items-center justify-center ">
