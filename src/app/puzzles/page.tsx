@@ -5,7 +5,7 @@ import { Lock, Unlock, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 
-export function useExposeToWindow(name: string, func: Function) {
+function useExposeToWindow(name: string, func: Function) {
   useEffect(() => {
     (window as any)[name] = func;
     return () => {
