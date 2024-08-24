@@ -7,7 +7,7 @@ const TypingEffect = () => {
 
   const texts = [
     "Welcome to My Interactive CV!",
-    "Engage with the interactive puzzles",
+    "Engage with the challanging puzzles",
     "Login for keeping track of your progress",
     "Explore my skills and experience",
     "Enjoy the journey and have fun!"
