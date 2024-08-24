@@ -21,7 +21,7 @@ export function Landing() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-10 bg-[#FFF]">
+      <header className="sticky top-0 z-10 bg-[#FFF] border-b border-[#aaa] w-full inset-1">
         <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-2 sm:px-6 lg:px-4">
           <Link
             href="#"
@@ -92,18 +92,18 @@ export function Landing() {
               Projects
             </Link>
             <Link
-              href="/puzzles"
-              className="text-sm md:text-[16px] font-medium hover:underline"
-              prefetch={false}
-            >
-              Puzzles
-            </Link>
-            <Link
               href="#contact"
               className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
               Contact
+            </Link>
+            <Link
+              href="/puzzles"
+              className="text-sm md:text-[16px] font-medium hover:underline"
+              prefetch={false}
+            >
+              Puzzles
             </Link>
           </nav>
           <Link href={"/puzzles"} className="sm:hidden">
@@ -111,15 +111,15 @@ export function Landing() {
           </Link>
         </div>
       </header>
-      <main className="flex-1">
+      <main className="flex-1 px-4 sm:px-12 md:px-24">
         <section
           id="hero"
           className="container mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12"
         >
-          <h1 className="text-xl font-bold tracking-tighter sm:text-2xl lg:text-4xl">
-            Welcome to a little piece of my mind. 🧠
+          <h1 className="text-xl mt-5 font-bold tracking-tighter sm:text-2xl lg:text-4xl">
+            Welcome to a little piece of my mind 🧠
           </h1>
-          <img src="/igor.png" className="max-w-[40%] mt-4" />
+          <img src="/igor.png" className="max-w-[40%] mt-2" />
           <div className="space-y-4 text-center">
             <div className="flex-row flex items-center justify-center ">
               <TerminalIcon className="h-8 w-8 inline-block mr-5" />
