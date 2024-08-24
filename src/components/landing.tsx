@@ -122,7 +122,7 @@ export function Landing() {
           id="hero"
           className="container mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12"
         >
-          <img src="/igor.png" className="max-w-[60%] mt-10" />
+          <img src="/igor.png" className="max-w-[50%] mt-10" />
           <div className="space-y-4 text-center">
             <h1 className="text-2xl font-bold tracking-tighter sm:text-5xl lg:text-6xl">
               Welcome to a little piece of my mind. 🧠
