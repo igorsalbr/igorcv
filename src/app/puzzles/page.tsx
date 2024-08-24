@@ -230,9 +230,9 @@ export default function Component() {
                 <CardTitle className="flex flex-row items-center justify-between text-xl">
                   <span>{challenge.title}</span>
                   {challenge.completed ? (
-                    <Unlock className="ml-auto text-green-500" />
+                    <Unlock className="ml-auto text-[#3E3] rounded-md" />
                   ) : (
-                    <Lock className="ml-auto text-red-500" />
+                    <Lock className="ml-auto text-[#E33] rounded-md" />
                   )}
                 </CardTitle>
               </CardHeader>
