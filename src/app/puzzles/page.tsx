@@ -5,6 +5,19 @@ import { Lock, Unlock, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 
+export function useExposeToWindow(name: string, func: Function) {
+  useEffect(() => {
+    (window as any)[name] = func;
+    return () => {
+      delete (window as any)[name];
+    };
+  }, [name, func]);
+}
+
+export function secretFunction() {
+  return "h4ck3r";
+}
+
 export default function Component() {
   const [progress, setProgress] = useState(0);
   const [openModal, setOpenModal] = useState(null);
@@ -18,7 +31,7 @@ export default function Component() {
       description:
         "Make an API call to create or update a user with the parameter 'imanerd': true",
       question: "What's the correct API endpoint to use?",
-      correctAnswer: "/api/user"
+      correctAnswer: "no api yet"
     },
     {
       id: 2,
@@ -26,7 +39,7 @@ export default function Component() {
       completed: false,
       description: "Find and interact with a hidden element on the page",
       question: "What's the ID of the hidden element?",
-      correctAnswer: "secretDiv"
+      correctAnswer: "salsal"
     },
     {
       id: 3,
@@ -40,8 +53,8 @@ export default function Component() {
       id: 4,
       title: "Invisible Button Clickathon",
       completed: false,
-      description: "Click three invisible buttons on the page",
-      question: "In what order should the buttons be clicked?",
+      description: "There are three invisible buttons on the page",
+      question: "In what order should the buttons be clicked? (123)",
       correctAnswer: "213"
     },
     {
@@ -88,6 +101,8 @@ export default function Component() {
   ]);
 
   const [icon, setIcon] = useState(0);
+
+  useExposeToWindow("secretFunction", secretFunction);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -141,7 +156,8 @@ export default function Component() {
               prefetch={false}
             >
               <span>
-                <div className="icon-container">
+                <div className="icon-container flex items-center flex-row">
+                  <div>Stack: &nbsp;</div>
                   <img
                     className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
                     src="go.png"
@@ -283,6 +299,7 @@ export default function Component() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+        <div className="hidden" id="salsal" />
       </div>
     </main>
   );
@@ -337,7 +354,7 @@ const CardContent = ({ children }: any) => (
 );
 
 const Progress = ({ value }: any) => (
-  <div className="w-full bg-[#eee] rounded-full h-2.5">
+  <div className="w-full mt-5 bg-[#eee] rounded-full h-2.5">
     <div
       className="bg-[#E33] text-[#fff] h-2.5 rounded-full transition-all duration-500 ease-out"
       style={{ width: `${value}%` }}

@@ -29,7 +29,8 @@ export function Landing() {
             prefetch={false}
           >
             <span>
-              <div className="icon-container">
+              <div className="icon-container flex items-center flex-row">
+                <div>Stack: &nbsp;</div>
                 <img
                   className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
                   src="go.png"
@@ -115,7 +116,10 @@ export function Landing() {
           id="hero"
           className="container mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12"
         >
-          <img src="/igor.png" className="max-w-[50%] mt-10" />
+          <h1 className="text-xl font-bold tracking-tighter sm:text-3xl mt-4 lg:text-4xl">
+            Hello, my name is Igor! 👋
+          </h1>
+          <img src="/igor.png" className="max-w-[40%] mt-4" />
           <div className="space-y-4 text-center">
             <h1 className="text-2xl font-bold tracking-tighter sm:text-5xl lg:text-6xl">
               Welcome to a little piece of my mind. 🧠
@@ -359,7 +363,7 @@ export function Landing() {
         >
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              Contact Me
+              Cont(r)act Me
             </h2>
             <p className="text-muted-foreground md:text-xl">
               Get in touch with me to discuss potential opportunities or just to
@@ -402,7 +406,36 @@ export function Landing() {
           </Card>
         </section>
       </main>
-      <footer className="bg-muted py-6"></footer>
+      <footer className="bg-muted py-6">
+        <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
+          <p className="text-muted-foreground">
+            &copy; 2024 Igor. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="https://instagram.com/igorschsal"
+              prefetch={false}
+              target="_blank"
+            >
+              <InstagramIcon />
+            </Link>
+            <Link
+              href="https://linkedin.com/in/igor-schroter-salviatto-929628171/"
+              prefetch={false}
+              target="_blank"
+            >
+              <LinkedinIcon />
+            </Link>
+            <Link
+              href="https://github.com/igorsalbr"
+              prefetch={false}
+              target="_blank"
+            >
+              <GithubIcon />
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -626,6 +659,67 @@ function TerminalIcon(props: any) {
     >
       <polyline points="4 17 10 11 4 5" />
       <line x1="12" x2="20" y1="19" y2="19" />
+    </svg>
+  );
+}
+
+function InstagramIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37a4 4 0 1 0-4.73 4.73 4 4 0 0 0 4.73-4.73z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
+function LinkedinIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+function GithubIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.45-1.17-1.11-1.48-1.11-1.48-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.71.11 2.51.32 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z" />
     </svg>
   );
 }
