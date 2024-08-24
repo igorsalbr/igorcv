@@ -6,10 +6,11 @@ const TypingEffect = () => {
   const [textIndex, setTextIndex] = useState(0);
 
   const texts = [
-    "This is my Interactive CV!",
-    "Engage with the challengind puzzles",
-    "Login for keeping track of your progress",
+    "This is my Interactive CV",
+    "Engage with the challenging puzzles!",
+    "Sign up for keeping track of your progress",
     "Explore my skills and experience",
+    "Leave me a feedback or a message :)",
     "Enjoy the journey and have fun!"
   ];
 
@@ -18,7 +19,7 @@ const TypingEffect = () => {
       const timeout = setTimeout(() => {
         setText((prev) => prev + texts[textIndex].charAt(index));
         setIndex(index + 1);
-      }, 100); // Ajuste o tempo para a velocidade de digitação desejada
+      }, 35); // Ajuste o tempo para a velocidade de digitação desejada
 
       return () => clearTimeout(timeout);
     } else {
@@ -26,7 +27,7 @@ const TypingEffect = () => {
         setIndex(0);
         setTextIndex((textIndex + 1) % texts.length);
         setText("");
-      }, 1200); // Tempo de espera antes de começar a digitar o próximo texto
+      }, 1100); // Tempo de espera antes de começar a digitar o próximo texto
 
       return () => clearTimeout(timeout);
     }
