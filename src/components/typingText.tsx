@@ -26,7 +26,7 @@ const TypingEffect = () => {
         setIndex(0);
         setTextIndex((textIndex + 1) % texts.length);
         setText("");
-      }, 2000); // Tempo de espera antes de começar a digitar o próximo texto
+      }, 1200); // Tempo de espera antes de começar a digitar o próximo texto
 
       return () => clearTimeout(timeout);
     }
