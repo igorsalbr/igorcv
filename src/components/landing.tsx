@@ -105,16 +105,9 @@ export function Landing() {
               Contact
             </Link>
           </nav>
-          <div className="sm:hidden">
-            <Button
-              variant="ghost"
-              onClick={() => {
-                //startMobileMenuPuzzle();
-              }}
-            >
-              Puzzles
-            </Button>
-          </div>
+          <Link href={"/puzzles"} className="sm:hidden">
+            Puzzles
+          </Link>
         </div>
       </header>
       <main className="flex-1">
