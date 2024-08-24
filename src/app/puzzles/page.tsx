@@ -14,7 +14,7 @@ export function useExposeToWindow(name: string, func: Function) {
   }, [name, func]);
 }
 
-export function secretFunction() {
+function secretFunction() {
   return "h4ck3r";
 }
 
