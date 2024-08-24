@@ -71,3 +71,21 @@
 html {
   scroll-behavior: smooth;
 }
+
+.typing-text {
+  font-size: 24px;
+  font-weight: semi-bold;
+  color: #777;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1px;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

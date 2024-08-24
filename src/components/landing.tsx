@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
+import TypingEffect from "@/components/typingText";
 
 export function Landing() {
   const [icon, setIcon] = useState(0);
@@ -30,47 +31,39 @@ export function Landing() {
             <span>
               <div className="icon-container">
                 <img
-                  className={icon == 0 ? "flex" : "hidden"}
+                  className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
                   src="go.png"
                   alt="GO"
-                  width={40}
-                  height={60}
                 />
                 <img
-                  className={icon == 1 ? "flex" : "hidden"}
+                  className={icon == 1 ? "flex w-12 md:w-16" : "hidden"}
                   src="ts.png"
                   alt="TypeScript"
-                  width={48}
                 />
                 <img
-                  className={icon == 2 ? "flex" : "hidden"}
+                  className={icon == 2 ? "flex w-14 md:w-[72px]" : "hidden"}
                   src="react.png"
                   alt="React.js"
-                  width={55}
                 />
                 <img
-                  className={icon == 3 ? "flex" : "hidden"}
+                  className={icon == 3 ? "flex w-14 md:w-[72px]" : "hidden"}
                   src="py.png"
                   alt="Python"
-                  width={55}
                 />
                 <img
-                  className={icon == 4 ? "flex" : "hidden"}
+                  className={icon == 4 ? "flex w-16 md:w-20" : "hidden"}
                   src="next.svg"
                   alt="Next"
-                  width={60}
                 />
                 <img
-                  className={icon == 5 ? "flex" : "hidden"}
+                  className={icon == 5 ? "flex w-16 md:w-20" : "hidden"}
                   src="retool.png"
                   alt="Retool"
-                  width={65}
                 />
                 <img
-                  className={icon == 6 ? "flex" : "hidden"}
+                  className={icon == 6 ? "flex w-10 md:w-16" : "hidden"}
                   src="bubble.png"
                   alt="Bubble"
-                  width={40}
                 />
               </div>
             </span>
@@ -78,35 +71,35 @@ export function Landing() {
           <nav className="hidden sm:flex ml-auto items-center gap-1 sm:gap-2 lg:gap-4">
             <Link
               href="#about"
-              className="text-sm font-medium hover:underline"
+              className="text-sm font-medium md:text-[16px] hover:underline"
               prefetch={false}
             >
               About
             </Link>
             <Link
               href="#skills"
-              className="text-sm font-medium hover:underline"
+              className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
               Skills
             </Link>
             <Link
               href="#projects"
-              className="text-sm font-medium hover:underline"
+              className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
               Projects
             </Link>
             <Link
               href="/puzzles"
-              className="text-sm font-medium hover:underline"
+              className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
               Puzzles
             </Link>
             <Link
               href="#contact"
-              className="text-sm font-medium hover:underline"
+              className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
               Contact
@@ -131,13 +124,13 @@ export function Landing() {
         >
           <img src="/igor.png" className="max-w-[60%] mt-10" />
           <div className="space-y-4 text-center">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-6xl">
-              Welcome to my Interactive CV
+            <h1 className="text-2xl font-bold tracking-tighter sm:text-5xl lg:text-6xl">
+              Welcome to a little piece of my mind. 🧠
             </h1>
-            <p className="text-muted-foreground md:text-xl">
-              Explore my skills and experience through a series of engaging
-              puzzles and challenges.
-            </p>
+            <div className="flex-row flex items-center justify-center ">
+              <TerminalIcon className="h-8 w-8 inline-block mr-5" />
+              <TypingEffect />
+            </div>
           </div>
           <Link href="#about">
             <Button className="flex items-center gap-2">
