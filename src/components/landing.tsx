@@ -126,7 +126,7 @@ export function Landing() {
             </div>
           </div>
           <Link href="#about">
-            <Button className="flex items-center gap-2">
+            <Button className="flex items-center gap-2 bg-[#E33]">
               <PlayIcon className="h-5 w-5" />
               Start Exploring
             </Button>
@@ -158,7 +158,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startCodingSkillsPuzzle();
                   }}
@@ -177,7 +177,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startProblemSolvingPuzzle();
                   }}
@@ -196,7 +196,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startWorkExperiencePuzzle();
                   }}
@@ -231,7 +231,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startReactSkillsPuzzle();
                   }}
@@ -250,7 +250,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startNodeSkillsPuzzle();
                   }}
@@ -269,7 +269,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startDatabaseSkillsPuzzle();
                   }}
@@ -304,7 +304,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     // startEcommerceProjectPuzzle();
                   }}
@@ -323,7 +323,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     //startMobileAppProjectPuzzle();
                   }}
@@ -342,7 +342,7 @@ export function Landing() {
                 </p>
                 <Button
                   variant="ghost"
-                  className="mt-4"
+                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
                   onClick={() => {
                     // startCloudInfrastructureProjectPuzzle();
                   }}

@@ -6,7 +6,7 @@ const TypingEffect = () => {
   const [textIndex, setTextIndex] = useState(0);
 
   const texts = [
-    "Welcome to My Interactive CV!",
+    "This is my Interactive CV!",
     "Engage with the challengind puzzles",
     "Login for keeping track of your progress",
     "Explore my skills and experience",

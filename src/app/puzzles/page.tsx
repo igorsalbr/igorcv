@@ -292,14 +292,14 @@ export default function Component() {
 
 const Button = ({ variant = "primary", children, ...props }: any) => {
   const variants = {
-    primary: "bg-[#E33] hover:bg-red-600 text-white",
+    primary: "bg-[#E33] text-[#fff] hover:bg-red-600 text-white",
     secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
     success: "bg-green-500 hover:bg-green-600 text-white"
   };
 
   return (
     <button
-      className={`px-4 py-2 rounded transition-colors bg-[#E33] hover:bg-red-600 text-white`}
+      className={`px-4 py-2 rounded transition-colors bg-[#E33] text-[#fff] hover:bg-red-600 text-white`}
       {...props}
     >
       {children}
@@ -339,7 +339,7 @@ const CardContent = ({ children }: any) => (
 const Progress = ({ value }: any) => (
   <div className="w-full bg-[#eee] rounded-full h-2.5">
     <div
-      className="bg-[#E33] h-2.5 rounded-full transition-all duration-500 ease-out"
+      className="bg-[#E33] text-[#fff] h-2.5 rounded-full transition-all duration-500 ease-out"
       style={{ width: `${value}%` }}
     ></div>
   </div>
