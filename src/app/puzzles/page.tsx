@@ -108,9 +108,6 @@ export default function Component() {
     setError("");
   };
 
-  const DialogClose = ({ asChild, children }: any) =>
-    asChild ? children : <button onClick={closeChallenge}>{children}</button>;
-
   const submitAnswer = () => {
     const challenge = challenges.find((c) => c.id === openModal);
     if (
@@ -263,12 +260,6 @@ export default function Component() {
                 {challenges.find((c) => c.id === openModal)?.description}
               </DialogDescription>
             </DialogHeader>
-            <DialogClose asChild>
-              <button className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                <X className="h-4 w-4" />
-                <span className="sr-only">Close</span>
-              </button>
-            </DialogClose>
             <div className="py-4">
               <Label
                 htmlFor="answer"
@@ -301,14 +292,14 @@ export default function Component() {
 
 const Button = ({ variant = "primary", children, ...props }: any) => {
   const variants = {
-    primary: "bg-red-500 hover:bg-red-600 text-white",
+    primary: "bg-[#E33] hover:bg-red-600 text-white",
     secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
     success: "bg-green-500 hover:bg-green-600 text-white"
   };
 
   return (
     <button
-      className={`px-4 py-2 rounded transition-colors bg-red-500 hover:bg-red-600 text-white`}
+      className={`px-4 py-2 rounded transition-colors bg-[#E33] hover:bg-red-600 text-white`}
       {...props}
     >
       {children}
@@ -346,9 +337,9 @@ const CardContent = ({ children }: any) => (
 );
 
 const Progress = ({ value }: any) => (
-  <div className="w-full bg-gray-200 rounded-full h-2.5">
+  <div className="w-full bg-[#eee] rounded-full h-2.5">
     <div
-      className="bg-red-500 h-2.5 rounded-full transition-all duration-500 ease-out"
+      className="bg-[#E33] h-2.5 rounded-full transition-all duration-500 ease-out"
       style={{ width: `${value}%` }}
     ></div>
   </div>
@@ -376,7 +367,7 @@ const DialogContent = ({ children }: any) => (
 );
 
 const DialogHeader = ({ children }: any) => (
-  <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+  <div className="flex flex-col items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
     {children}
   </div>
 );
