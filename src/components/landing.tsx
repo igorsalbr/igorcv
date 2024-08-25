@@ -9,8 +9,42 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import TypingEffect from "@/components/typingText";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const BEARER_TOKEN = process.env.NEXT_PUBLIC_BEARER_GENERAL_TOKEN;
+
 export function Landing() {
   const [icon, setIcon] = useState(0);
+  const [message, setMessage] = useState("");
+
+  // call API to send message
+  const handleMessageSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${BEARER_TOKEN}`
+        },
+        body: JSON.stringify({
+          userId: localStorage.getItem("userID"),
+          message: message
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Message failed");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      // Clear the message after successful submission
+      setMessage("");
+    } catch (err) {
+      console.error("Failed to send message:", err);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -360,7 +394,7 @@ export function Landing() {
         >
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              Cont(r)act Me
+              Contact Me
             </h2>
             <p className="text-muted-foreground md:text-xl">
               Get in touch with me to discuss potential opportunities or just to
@@ -388,14 +422,14 @@ export function Landing() {
                     id="message"
                     placeholder="Your message..."
                     rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   />
                 </div>
               </div>
               <Button
                 className="w-full max-w-md"
-                onClick={() => {
-                  //startContactFormPuzzle();
-                }}
+                onClick={(e) => handleMessageSubmit(e)}
               >
                 Submit
               </Button>
