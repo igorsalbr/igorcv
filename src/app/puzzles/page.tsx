@@ -204,11 +204,11 @@ export default function Component() {
               Skills
             </Link>
             <Link
-              href="/#projects"
+              href="/#hobbies"
               className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
-              Projects
+              Hobbies
             </Link>
             <Link
               href="/#contact"

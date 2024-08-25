@@ -119,11 +119,11 @@ export function Landing() {
               Skills
             </Link>
             <Link
-              href="#projects"
+              href="#hobbies"
               className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
-              Projects
+              Hobbies
             </Link>
             <Link
               href="#contact"
@@ -155,13 +155,13 @@ export function Landing() {
           </h1>
           <img src="/igor.png" className="max-w-[40%] mt-2" />
           <div className="space-y-4 text-center">
-            <div className="flex-row flex items-center justify-center ">
+            <div className="flex-row flex items-center  min-h-[56px] justify-center ">
               <TerminalIcon className="h-8 w-8 inline-block mr-5" />
               <TypingEffect />
             </div>
           </div>
           <Link href="#about">
-            <Button className="flex items-center gap-2 bg-[#E33]">
+            <Button className="flex items-center gap-2 -mt-4 bg-[#E33]">
               <PlayIcon className="h-5 w-5" />
               Start Exploring
             </Button>
@@ -185,11 +185,85 @@ export function Landing() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
+                <BriefcaseIcon className="h-12 w-12 text-primary" />
+                <h3 className="text-xl font-semibold">Work Experience</h3>
+                <p className="text-center text-muted-foreground">
+                  Extensive experience working on a variety of web projects for
+                  clients and employers.
+                </p>
+                <Button
+                  variant="ghost"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
+                  onClick={() => {
+                    //startWorkExperiencePuzzle();
+                  }}
+                >
+                  Explore Work Experience
+                </Button>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
+                <BriefcaseIcon className="h-12 w-12 text-primary" />
+                <h3 className="text-xl font-semibold">Academic Experience</h3>
+                <p className="text-center text-muted-foreground">
+                  Graduating from the University of São Paulo with a degree in
+                  Mechatronics Engineering.
+                </p>
+                <Button
+                  variant="ghost"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
+                  onClick={() => {
+                    //startWorkExperiencePuzzle();
+                  }}
+                >
+                  Explore Academic Experience
+                </Button>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
+                <BriefcaseIcon className="h-12 w-12 text-primary" />
+                <h3 className="text-xl font-semibold">Personal projects</h3>
+                <p className="text-center text-muted-foreground">
+                  Developing personal projectsand social initiatives to improve
+                  my skills and learn new technologies and make an impact where
+                  i can.
+                </p>
+                <Button
+                  variant="ghost"
+                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
+                  onClick={() => {
+                    //startWorkExperiencePuzzle();
+                  }}
+                >
+                  Explore Work Experience
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+        <section
+          id="skills"
+          className="container mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+        >
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+              My Skills
+            </h2>
+            <p className="text-muted-foreground md:text-xl">
+              Explore my technical skills and expertise through a series of
+              interactive challenges.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
                 <CodeIcon className="h-12 w-12 text-primary" />
                 <h3 className="text-xl font-semibold">Coding Skills</h3>
                 <p className="text-center text-muted-foreground">
-                  Proficient in a wide range of programming languages and
-                  frameworks, including React, Node.js, and Python.
+                  Proficient in a wide range of programming languages including
+                  GO, Javascript, C++ and Python.
                 </p>
                 <Button
                   variant="ghost"
@@ -223,43 +297,10 @@ export function Landing() {
             </Card>
             <Card>
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                <BriefcaseIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">Work Experience</h3>
-                <p className="text-center text-muted-foreground">
-                  Extensive experience working on a variety of web projects for
-                  clients and employers.
-                </p>
-                <Button
-                  variant="ghost"
-                  className="mt-4 bg-[#E33] text-[#fff] rounded-md"
-                  onClick={() => {
-                    //startWorkExperiencePuzzle();
-                  }}
-                >
-                  Explore Work Experience
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-        <section
-          id="skills"
-          className="container mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-        >
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              My Skills
-            </h2>
-            <p className="text-muted-foreground md:text-xl">
-              Explore my technical skills and expertise through a series of
-              interactive challenges.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
                 <CodepenIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">React</h3>
+                <h3 className="text-xl font-semibold">
+                  React and Next frameworks
+                </h3>
                 <p className="text-center text-muted-foreground">
                   Proficient in building complex and responsive user interfaces
                   using React.
@@ -278,10 +319,10 @@ export function Landing() {
             <Card>
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
                 <NetworkIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">Node.js</h3>
+                <h3 className="text-xl font-semibold">Retool and Bubble.io</h3>
                 <p className="text-center text-muted-foreground">
-                  Experienced in building scalable and efficient back-end
-                  applications using Node.js.
+                  Experienced in building internal tools and web applications on
+                  low code platforms.
                 </p>
                 <Button
                   variant="ghost"
@@ -290,7 +331,7 @@ export function Landing() {
                     //startNodeSkillsPuzzle();
                   }}
                 >
-                  Explore Node.js Skills
+                  Explore Low Code Built Apps
                 </Button>
               </CardContent>
             </Card>
@@ -313,29 +354,52 @@ export function Landing() {
                 </Button>
               </CardContent>
             </Card>
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
+                <DatabaseIcon className="h-12 w-12 text-primary" />
+                <h3 className="text-xl font-semibold">
+                  Artificial Intelligence
+                </h3>
+                <p className="text-center text-muted-foreground">
+                  Daily use of AI and Machine Learning to solve problems and
+                  decision making. Integrated with various OpenAi api&apos;s,
+                  tested a bunch of models, broke some prompts and made some
+                  cool stuff.
+                </p>
+                <Button
+                  variant="ghost"
+                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
+                  onClick={() => {
+                    //startDatabaseSkillsPuzzle();
+                  }}
+                >
+                  Explore AI Skills
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </section>
         <section
-          id="projects"
+          id="hobbies"
           className="container mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
         >
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              My Projects
+              My Hobbies
             </h2>
             <p className="text-muted-foreground md:text-xl">
-              Explore some of my past projects and the challenges I faced in
-              developing them.
+              Explore my hobbies and interests that keep me busy outside of
+              work.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
                 <LaptopIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">E-commerce Platform</h3>
+                <h3 className="text-xl font-semibold">Soccer</h3>
                 <p className="text-center text-muted-foreground">
-                  Developed a scalable and feature-rich e-commerce platform
-                  using React, Node.js, and a NoSQL database.
+                  Playing soccer is my favorite hobby. I play soccer every
+                  tuesday with my friends.
                 </p>
                 <Button
                   variant="ghost"
@@ -344,17 +408,16 @@ export function Landing() {
                     // startEcommerceProjectPuzzle();
                   }}
                 >
-                  Explore E-commerce Project
+                  Explore Soccer Habilities
                 </Button>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
                 <SmartphoneIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">Mobile App</h3>
+                <h3 className="text-xl font-semibold">MMA</h3>
                 <p className="text-center text-muted-foreground">
-                  Developed a cross-platform mobile app using React Native and
-                  integrated with various APIs.
+                  I love to watch MMA fights and practice some moves at the gym.
                 </p>
                 <Button
                   variant="ghost"
@@ -363,17 +426,17 @@ export function Landing() {
                     //startMobileAppProjectPuzzle();
                   }}
                 >
-                  Explore Mobile App Project
+                  Explore MMA Fights
                 </Button>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
                 <CloudIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">Cloud Infrastructure</h3>
+                <h3 className="text-xl font-semibold">Games</h3>
                 <p className="text-center text-muted-foreground">
-                  Designed and deployed scalable cloud infrastructure using AWS
-                  and Terraform.
+                  I love to play games, especially RPG and strategy games or
+                  fps.
                 </p>
                 <Button
                   variant="ghost"
@@ -382,7 +445,7 @@ export function Landing() {
                     // startCloudInfrastructureProjectPuzzle();
                   }}
                 >
-                  Explore Cloud Infrastructure Project
+                  Explore Gaming Skills
                 </Button>
               </CardContent>
             </Card>
