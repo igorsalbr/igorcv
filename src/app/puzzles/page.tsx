@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, Unlock, X } from "lucide-react";
+import { Lock, Unlock } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -305,8 +305,6 @@ export default function Component() {
     </main>
   );
 }
-
-// Custom components
 
 const Button = ({ variant = "primary", children, ...props }: any) => {
   const variants = {
