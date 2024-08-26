@@ -469,6 +469,6 @@ function confetti() {
     document.body.appendChild(confetti);
     setTimeout(() => {
       confetti.remove();
-    }, 4000);
+    }, 4200);
   }
 }
