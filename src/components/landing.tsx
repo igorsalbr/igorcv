@@ -180,7 +180,7 @@ export function Landing() {
           id="hero"
           className="container mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-8 sm:px-6 lg:px-8 lg:pb-12"
         >
-          <h1 className="text-xl mt-5 font-bold tracking-tighter sm:text-2xl lg:text-4xl">
+          <h1 className="text-xl mt-5 font-bold tracking-tighter sm:text-2xl lg:text-4xl text-center">
             Welcome to a little piece of my mind 🧠
           </h1>
           <img src="/igor.png" className="max-w-[40%] mt-2" />
