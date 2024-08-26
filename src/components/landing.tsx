@@ -45,7 +45,7 @@ export function Landing() {
           Authorization: `Bearer ${BEARER_TOKEN}`
         },
         body: JSON.stringify({
-          userId: localStorage.getItem("userID"),
+          senderId: userID,
           message: message
         })
       });
