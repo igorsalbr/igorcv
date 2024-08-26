@@ -9,9 +9,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import TypingEffect from "@/components/typingText";
 import { RiAccountCircleLine } from "react-icons/ri";
+import { IoMdExit } from "react-icons/io";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const BEARER_TOKEN = process.env.NEXT_PUBLIC_BEARER_GENERAL_TOKEN;
+
+function logout() {
+  localStorage.removeItem("userID");
+  localStorage.removeItem("generalToken");
+  localStorage.removeItem("restrictedToken");
+  window.location.href = "/";
+}
 
 export function Landing() {
   const [icon, setIcon] = useState(0);
@@ -19,11 +27,9 @@ export function Landing() {
   const [userID, setUserID] = useState("");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUserID = localStorage.getItem("userID");
-      if (storedUserID) {
-        setUserID(storedUserID);
-      }
+    const storedUserID = localStorage.getItem("userID");
+    if (storedUserID) {
+      setUserID(storedUserID);
     }
   }, []);
 
@@ -154,9 +160,18 @@ export function Landing() {
           <Link href={"/puzzles"} className="sm:hidden mx-auto">
             Puzzles
           </Link>
-          <Link href={"/login"} className="ml-auto">
-            <RiAccountCircleLine size={28} />
-          </Link>
+          {!userID.length ? (
+            <Link href={"/login"} className="ml-auto">
+              <RiAccountCircleLine size={28} />
+            </Link>
+          ) : (
+            <div
+              onClick={() => logout()}
+              className="ml-auto cursor-pointer text-[#f33]"
+            >
+              <IoMdExit size={28} />
+            </div>
+          )}
         </div>
       </header>
       <main className="flex-1 px-4 sm:px-12 md:px-24">
