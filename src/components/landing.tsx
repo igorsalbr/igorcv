@@ -45,7 +45,7 @@ export function Landing() {
           Authorization: `Bearer ${BEARER_TOKEN}`
         },
         body: JSON.stringify({
-          userId: localStorage.getItem("userID"),
+          senderId: userID,
           message: message
         })
       });
@@ -56,8 +56,9 @@ export function Landing() {
 
       const data = await response.json();
       console.log(data);
-      // Clear the message after successful submission
       setMessage("");
+      // show success message sent
+      alert("Message sent successfully!");
     } catch (err) {
       console.error("Failed to send message:", err);
     }
