@@ -34,7 +34,7 @@ const TypingEffect = () => {
   }, [index, textIndex]);
 
   return (
-    <h1 className="typing-text">
+    <h1 className="typing-text text-lg text-center justify-center  lg:text-2xl">
       {text}
       <span className="cursor">|</span>
     </h1>

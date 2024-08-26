@@ -98,9 +98,15 @@ export default function Component() {
   useExposeToWindow("secretFunction", secretFunction);
 
   useEffect(() => {
+    if (progress === 100) {
+      confetti();
+    }
+  }, [progress]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setIcon((icon) => (icon + 1) % 7);
-    }, 1200);
+    }, 1500);
     return () => clearInterval(interval);
   }, []);
 
@@ -204,11 +210,11 @@ export default function Component() {
               Skills
             </Link>
             <Link
-              href="/#projects"
+              href="/#hobbies"
               className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
             >
-              Projects
+              Hobbies
             </Link>
             <Link
               href="/#contact"
@@ -231,10 +237,19 @@ export default function Component() {
         </div>
       </header>
       <div className="min-h-screen bg-gray-100 text-gray-900 px-4 sm:px-12 md:px-24">
+        <div className="flex flex-col items-center justify-center mt-10 mb-5">
+          <Link
+            href={"https://mpago.la/1ozZqt4"}
+            className="text-gray-700 text-center underline"
+            target="_blank"
+          >
+            Cafézin?
+          </Link>
+        </div>
         <Progress value={progress} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-12 mt-8 px-12 max-w-6xl ">
           {challenges.map((challenge) => (
-            <Card key={challenge.id}>
+            <Card key={challenge.id} completed={challenge.completed}>
               <CardHeader>
                 <CardTitle className="flex flex-row items-center justify-between text-xl">
                   <span>{challenge.title}</span>
@@ -246,7 +261,7 @@ export default function Component() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-auto">{challenge.description}</p>
+                <p className="text-gray-700 mb-4">{challenge.description}</p>
                 <Button
                   onClick={() => openChallenge(challenge.id)}
                   variant={challenge.completed ? "success" : "primary"}
@@ -258,15 +273,6 @@ export default function Component() {
             </Card>
           ))}
         </div>
-        <footer className="flex flex-col items-center justify-center mt-8">
-          <Link
-            href={"https://mpago.la/1ozZqt4"}
-            className="text-gray-700 text-center underline"
-            target="_blank"
-          >
-            Cafézin?
-          </Link>
-        </footer>
 
         <Dialog open={openModal !== null} onOpenChange={closeChallenge}>
           <DialogContent>
@@ -332,8 +338,12 @@ const Input = ({ error, ...props }: any) => (
   />
 );
 
-const Card = ({ children }: any) => (
-  <div className="bg-white border-2 border-red-500 rounded-lg overflow-hidden transition-shadow hover:shadow-lg">
+const Card = ({ children, completed }: any) => (
+  <div
+    className={`bg-white border-2 ${
+      !completed ? "border-[#f33]" : "border-[#3f3]"
+    } rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg `}
+  >
     {children}
   </div>
 );
@@ -349,13 +359,15 @@ const CardTitle = ({ children }: any) => (
 );
 
 const CardContent = ({ children }: any) => (
-  <div className="p-4 flex flex-col min-h-[120px]">{children}</div>
+  <div className="p-4 flex flex-col min-h-[160px]">{children}</div>
 );
 
 const Progress = ({ value }: any) => (
   <div className="w-full mt-5 bg-[#eee] rounded-full h-2.5">
     <div
-      className="bg-[#E33] text-[#fff] h-2.5 rounded-full transition-all duration-500 ease-out"
+      className={`${
+        value != 100 ? "bg-[#E33]" : "bg-[#3E3]"
+      } text-[#fff] h-2.5 rounded-full transition-all duration-500  ease-out`}
       style={{ width: `${value}%` }}
     ></div>
   </div>
@@ -407,3 +419,26 @@ const Label = ({ htmlFor, children, ...props }: any) => (
     {children}
   </label>
 );
+
+function confetti() {
+  const colors = [
+    "#ff0000",
+    "#00ff00",
+    "#0000ff",
+    "#ffff00",
+    "#ff00ff",
+    "#00ffff"
+  ];
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.animationDuration = Math.random() * 2 + 3 + "s";
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(confetti);
+    setTimeout(() => {
+      confetti.remove();
+    }, 4000);
+  }
+}
