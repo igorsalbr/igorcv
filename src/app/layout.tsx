@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Full Stack Developer | GO | JavaScript | Next.js | Python | C++",
     description:
       "Virtual resume for tech recruiters and those interested in learning about my skills in GO, JavaScript, Next.js, Python, and C++.",
-    url: "https://igorsal.com",
+    url: "https://igorsal.pages.dev",
     type: "website",
     images: [
       {

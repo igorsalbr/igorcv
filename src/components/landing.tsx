@@ -74,7 +74,7 @@ export function Landing() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-10 bg-[#FFF] border-b border-[#aaa] w-full inset-1">
-        <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-2 sm:px-6 lg:px-4">
+        <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-2 sm:px-4 lg:px-6">
           <Link
             href="#"
             className="flex items-center pr-2 text-lg font-semibold"
