@@ -165,7 +165,7 @@ export default function Component() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <header className="sticky top-0 z-10 bg-[#FFF] border-b border-[#aaa] w-full outset-1 ">
-        <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-6 lg:px-4">
+        <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-2 sm:px-4 lg:px-6">
           <Link
             href="#"
             className="flex items-center pr-2 text-lg font-semibold"
