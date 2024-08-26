@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Lock, Unlock } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { IoMdExit } from "react-icons/io";
 
 function useExposeToWindow(name: string, func: Function) {
   useEffect(() => {
@@ -16,6 +18,13 @@ function useExposeToWindow(name: string, func: Function) {
 
 function secretFunction() {
   return "h4ck3r";
+}
+
+function logout() {
+  localStorage.removeItem("userID");
+  localStorage.removeItem("generalToken");
+  localStorage.removeItem("restrictedToken");
+  window.location.href = "/";
 }
 
 export default function Component() {
@@ -93,6 +102,15 @@ export default function Component() {
     }
   ]);
 
+  const [userID, setUserID] = useState("");
+
+  useEffect(() => {
+    const storedUserID = localStorage.getItem("userID");
+    if (storedUserID) {
+      setUserID(storedUserID);
+    }
+  }, []);
+
   const [icon, setIcon] = useState(0);
 
   useExposeToWindow("secretFunction", secretFunction);
@@ -157,44 +175,44 @@ export default function Component() {
               <div className="icon-container flex items-center flex-row">
                 <div>Stack: &nbsp;</div>
                 <img
-                  className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
+                  className={icon == 0 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="go.png"
                   alt="GO"
                 />
                 <img
-                  className={icon == 1 ? "flex w-12 md:w-16" : "hidden"}
+                  className={icon == 1 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="ts.png"
                   alt="TypeScript"
                 />
                 <img
-                  className={icon == 2 ? "flex w-14 md:w-[72px]" : "hidden"}
+                  className={icon == 2 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="react.png"
                   alt="React.js"
                 />
                 <img
-                  className={icon == 3 ? "flex w-14 md:w-[72px]" : "hidden"}
+                  className={icon == 3 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="py.png"
                   alt="Python"
                 />
                 <img
-                  className={icon == 4 ? "flex w-16 md:w-20" : "hidden"}
+                  className={icon == 4 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="next.svg"
                   alt="Next"
                 />
                 <img
-                  className={icon == 5 ? "flex w-16 md:w-20" : "hidden"}
+                  className={icon == 5 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="retool.png"
                   alt="Retool"
                 />
                 <img
-                  className={icon == 6 ? "flex w-10 md:w-16" : "hidden"}
+                  className={icon == 6 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="bubble.png"
                   alt="Bubble"
                 />
               </div>
             </span>
           </Link>
-          <nav className="hidden sm:flex ml-auto items-center gap-1 sm:gap-2 lg:gap-4">
+          <nav className="hidden sm:flex mx-auto items-center gap-1 sm:gap-2 lg:gap-4">
             <Link
               href="/#about"
               className="text-sm font-medium md:text-[16px] hover:underline"
@@ -231,9 +249,21 @@ export default function Component() {
               Home
             </Link>
           </nav>
-          <Link href={"/"} className="sm:hidden">
+          <Link href={"/"} className="sm:hidden mx-auto">
             Home
           </Link>
+          {!userID.length ? (
+            <Link href={"/login"} className="ml-auto">
+              <RiAccountCircleLine size={28} />
+            </Link>
+          ) : (
+            <div
+              onClick={() => logout()}
+              className="ml-auto cursor-pointer text-[#f33]"
+            >
+              <IoMdExit size={28} />
+            </div>
+          )}
         </div>
       </header>
       <div className="min-h-screen bg-gray-100 text-gray-900 px-4 sm:px-12 md:px-24">

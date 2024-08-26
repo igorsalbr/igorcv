@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import TypingEffect from "@/components/typingText";
+import { RiAccountCircleLine } from "react-icons/ri";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const BEARER_TOKEN = process.env.NEXT_PUBLIC_BEARER_GENERAL_TOKEN;
@@ -15,6 +16,16 @@ const BEARER_TOKEN = process.env.NEXT_PUBLIC_BEARER_GENERAL_TOKEN;
 export function Landing() {
   const [icon, setIcon] = useState(0);
   const [message, setMessage] = useState("");
+  const [userID, setUserID] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUserID = localStorage.getItem("userID");
+      if (storedUserID) {
+        setUserID(storedUserID);
+      }
+    }
+  }, []);
 
   // call API to send message
   const handleMessageSubmit = async (e: React.FormEvent) => {
@@ -66,44 +77,44 @@ export function Landing() {
               <div className="icon-container flex items-center flex-row">
                 <div>Stack: &nbsp;</div>
                 <img
-                  className={icon == 0 ? "flex w-10  md:w-14" : "hidden"}
+                  className={icon == 0 ? "flex  w-14 md:w-[62px]" : "hidden"}
                   src="go.png"
                   alt="GO"
                 />
                 <img
-                  className={icon == 1 ? "flex w-12 md:w-16" : "hidden"}
+                  className={icon == 1 ? "flex w-14 md:w-[62px]" : "hidden"}
                   src="ts.png"
                   alt="TypeScript"
                 />
                 <img
-                  className={icon == 2 ? "flex w-14 md:w-[72px]" : "hidden"}
+                  className={icon == 2 ? "flex  w-14 md:w-[62px]" : "hidden"}
                   src="react.png"
                   alt="React.js"
                 />
                 <img
-                  className={icon == 3 ? "flex w-14 md:w-[72px]" : "hidden"}
+                  className={icon == 3 ? "flex  w-14 md:w-[62px]" : "hidden"}
                   src="py.png"
                   alt="Python"
                 />
                 <img
-                  className={icon == 4 ? "flex w-16 md:w-20" : "hidden"}
+                  className={icon == 4 ? "flex  w-14 md:w-[62px]" : "hidden"}
                   src="next.svg"
                   alt="Next"
                 />
                 <img
-                  className={icon == 5 ? "flex w-16 md:w-20" : "hidden"}
+                  className={icon == 5 ? "flex  w-14 md:w-[62px]" : "hidden"}
                   src="retool.png"
                   alt="Retool"
                 />
                 <img
-                  className={icon == 6 ? "flex w-10 md:w-16" : "hidden"}
+                  className={icon == 6 ? "flex  w-14 md:w-[62px]" : "hidden"}
                   src="bubble.png"
                   alt="Bubble"
                 />
               </div>
             </span>
           </Link>
-          <nav className="hidden sm:flex ml-auto items-center gap-1 sm:gap-2 lg:gap-4">
+          <nav className="hidden sm:flex mx-auto items-center gap-1 sm:gap-2 lg:gap-4">
             <Link
               href="#about"
               className="text-sm font-medium md:text-[16px] hover:underline"
@@ -140,8 +151,11 @@ export function Landing() {
               Puzzles
             </Link>
           </nav>
-          <Link href={"/puzzles"} className="sm:hidden">
+          <Link href={"/puzzles"} className="sm:hidden mx-auto">
             Puzzles
+          </Link>
+          <Link href={"/login"} className="ml-auto">
+            <RiAccountCircleLine size={28} />
           </Link>
         </div>
       </header>
@@ -464,40 +478,32 @@ export function Landing() {
               chat.
             </p>
           </div>
-          <Card>
-            <CardContent className="flex flex-col items-center justify-center gap-6 p-6 sm:p-8">
-              <div className="grid w-full max-w-md gap-4">
-                <div className="space-y-1">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="John Doe" />
+          {
+            //userID.length > 0 ? (
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center gap-6 p-6 sm:p-8">
+                <div className="grid w-full max-w-md gap-4">
+                  <div className="space-y-1">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="Your message..."
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Your message..."
-                    rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  />
-                </div>
-              </div>
-              <Button
-                className="w-full max-w-md"
-                onClick={(e) => handleMessageSubmit(e)}
-              >
-                Submit
-              </Button>
-            </CardContent>
-          </Card>
+                <Button
+                  className="w-full max-w-md"
+                  onClick={(e) => handleMessageSubmit(e)}
+                >
+                  Submit
+                </Button>
+              </CardContent>
+            </Card>
+            // ) : ("")
+          }
         </section>
       </main>
       <footer className="bg-muted py-6">

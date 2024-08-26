@@ -35,7 +35,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -70,7 +70,7 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleLogin} className="space-y-4">
       <div>
         <label
           htmlFor="email"
@@ -121,7 +121,7 @@ function SignUpForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSingUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess(false);
@@ -141,13 +141,47 @@ function SignUpForm() {
       }
 
       setSuccess(true);
+      handleLogin(e);
     } catch (err) {
       setError("Failed to create account. Please try again.");
     }
   };
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${BEARER_TOKEN}`
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+
+      // Save tokens in localStorage
+      localStorage.setItem("userID", data.userID);
+      localStorage.setItem("generalToken", data.generalToken);
+      if (data.admin && data.restrictedToken) {
+        localStorage.setItem("restrictedToken", data.restrictedToken);
+      }
+
+      // Redirect to home page
+      window.location.href = "/";
+    } catch (err) {
+      setError("Invalid email or password");
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSingUp} className="space-y-4">
       <div>
         <label
           htmlFor="name"
