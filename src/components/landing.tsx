@@ -137,13 +137,6 @@ export function Landing() {
               Skills
             </Link>
             <Link
-              href="#hobbies"
-              className="text-sm md:text-[16px] font-medium hover:underline"
-              prefetch={false}
-            >
-              Hobbies
-            </Link>
-            <Link
               href="#contact"
               className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
@@ -206,11 +199,22 @@ export function Landing() {
               About Me
             </h2>
             <p className="text-muted-foreground md:text-xl">
-              I am a full-stack developer with a passion for creating innovative
-              and interactive web experiences. I have a strong background in
-              both front-end and back-end development, and I am always eager to
-              learn new technologies and techniques.
+              Hi! My name is Igor. I am a full-stack developer with a passion
+              for creating innovative and interactive web experiences. I have a
+              strong background in both front-end and back-end development, and
+              I am always eager to learn new technologies and techniques.
+              <br />
+              <br />
+              Contact me to discuss opportunities.
             </p>
+            <a
+              href="https://app.mindsight.com.br/en/devolutiva/1eb572e9-ba37-421d-a01e-aa772bb1a9ec/"
+              target="_blank"
+              className="mt-4 no-underline text-[#E33] hover:underline"
+            >
+              Personality Test
+            </a>
+            <Button className="bg-[#E33] ml-6">Download my resume</Button>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
@@ -256,7 +260,7 @@ export function Landing() {
                 <BriefcaseIcon className="h-12 w-12 text-primary" />
                 <h3 className="text-xl font-semibold">Personal projects</h3>
                 <p className="text-center text-muted-foreground">
-                  Developing personal projectsand social initiatives to improve
+                  Developing personal projects and social initiatives to improve
                   my skills and learn new technologies and make an impact where
                   i can.
                 </p>
@@ -267,7 +271,7 @@ export function Landing() {
                     //startWorkExperiencePuzzle();
                   }}
                 >
-                  Explore Work Experience
+                  Explore Personal projects
                 </Button>
               </CardContent>
             </Card>
@@ -404,78 +408,6 @@ export function Landing() {
                   }}
                 >
                   Explore AI Skills
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-        <section
-          id="hobbies"
-          className="container mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-        >
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              My Hobbies
-            </h2>
-            <p className="text-muted-foreground md:text-xl">
-              Explore my hobbies and interests that keep me busy outside of
-              work.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                <LaptopIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">Soccer</h3>
-                <p className="text-center text-muted-foreground">
-                  Playing soccer is my favorite hobby. I play soccer every
-                  tuesday with my friends.
-                </p>
-                <Button
-                  variant="ghost"
-                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
-                  onClick={() => {
-                    // startEcommerceProjectPuzzle();
-                  }}
-                >
-                  Explore Soccer Habilities
-                </Button>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                <SmartphoneIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">MMA</h3>
-                <p className="text-center text-muted-foreground">
-                  I love to watch MMA fights and practice some moves at the gym.
-                </p>
-                <Button
-                  variant="ghost"
-                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
-                  onClick={() => {
-                    //startMobileAppProjectPuzzle();
-                  }}
-                >
-                  Explore MMA Fights
-                </Button>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                <CloudIcon className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-semibold">Games</h3>
-                <p className="text-center text-muted-foreground">
-                  I love to play games, especially RPG and strategy games or
-                  fps.
-                </p>
-                <Button
-                  variant="ghost"
-                  className="mt-4  bg-[#E33] text-[#fff] rounded-md"
-                  onClick={() => {
-                    // startCloudInfrastructureProjectPuzzle();
-                  }}
-                >
-                  Explore Gaming Skills
                 </Button>
               </CardContent>
             </Card>
