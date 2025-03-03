@@ -91,7 +91,7 @@ export function Landing() {
   // Fetch current tower height (community-wide interactive feature)
   const fetchTowerHeight = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/tower/1`, {
+      const res = await fetch(`${API_URL}/tower/1`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("generalToken")}`
         }
@@ -108,7 +108,7 @@ export function Landing() {
   // Increment tower height
   const handleTowerIncrement = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/tower/increment`, {
+      const res = await fetch(`${API_URL}/increment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export function Landing() {
   // Decrement tower height
   const handleTowerDecrement = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/tower/decrement`, {
+      const res = await fetch(`${API_URL}/tower/decrement`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
