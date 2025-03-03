@@ -479,7 +479,7 @@ export function Landing() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               Ping Pong
             </h2>
-            {!userID ? (
+            {userID ? (
               <div className="flex w-full items-center mx-auto justify-center text-center">
                 <PingPong />
               </div>
