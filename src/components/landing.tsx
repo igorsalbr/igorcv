@@ -90,7 +90,7 @@ export function Landing() {
   // Fetch current tower height (community-wide interactive feature)
   const fetchTowerHeight = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/tower`, {
+      const res = await fetch(`${API_URL}/api/tower/1`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("generalToken")}`
         }
