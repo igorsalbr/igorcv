@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import TypingEffect from "@/components/typingText";
-import { MemoryGame } from "@/components/memory-game";
+import PingPong from "@/components/ping-pong";
+
 import {
   TerminalIcon,
   LinkedinIcon,
@@ -476,15 +477,15 @@ export function Landing() {
         <section id="game" className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-              Memory Game
+              Ping Pong
             </h2>
-            {userID ? (
-              <MemoryGame userID={userID} />
+            {!userID ? (
+              <div className="flex w-full items-center mx-auto justify-center text-center">
+                <PingPong />
+              </div>
             ) : (
               <div className="text-center">
-                <p className="text-sm mb-4">
-                  Please log in to play and track high scores!
-                </p>
+                <p className="text-sm mb-4">Must be logged to play!</p>
                 <Link href="/login">
                   <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm">
                     Login to Play
@@ -504,6 +505,7 @@ export function Landing() {
             <p className="text-sm text-gray-600 mb-4 max-w-xl mx-auto">
               This interactive section lets everyone add or remove blocks from a
               global tower. Each visit influences the final height in real-time.
+              Add or remove blocks if you are logged in.
             </p>
             <div className="max-w-sm mx-auto bg-white p-6 rounded-md shadow-md">
               <TowerVisualizer
