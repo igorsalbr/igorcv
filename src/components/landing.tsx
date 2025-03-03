@@ -99,7 +99,7 @@ export function Landing() {
       });
       if (res.ok) {
         const data = await res.json();
-        setTowerHeight(data.current_height);
+        setTowerHeight(data.height);
       }
     } catch (err) {
       console.error("Error fetching tower height:", err);
