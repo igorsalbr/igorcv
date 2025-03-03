@@ -93,6 +93,7 @@ export function Landing() {
     try {
       const res = await fetch(`${API_URL}/tower/1`, {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("generalToken")}`
         }
       });
