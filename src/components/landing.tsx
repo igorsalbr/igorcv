@@ -91,7 +91,7 @@ export function Landing() {
   // Fetch current tower height (community-wide interactive feature)
   const fetchTowerHeight = async () => {
     try {
-      const res = await fetch(`${API_URL}/tower/1`, {
+      const res = await fetch(`${API_URL}/tower`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("generalToken")}`
@@ -481,7 +481,7 @@ export function Landing() {
               Ping Pong
             </h2>
             {userID ? (
-              <div className="flex w-full items-center mx-auto justify-center text-center">
+              <div className="hidden md:flex w-full items-center mx-auto justify-center text-center">
                 <PingPong />
               </div>
             ) : (
