@@ -475,14 +475,21 @@ export function Landing() {
         </section>
 
         {/* MEMORY GAME SECTION */}
-        <section id="game" className="bg-gray-50 py-16">
+        <section id="game" className="bg-gray-50 py-6">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               Ping Pong
             </h2>
             {userID ? (
-              <div className="hidden md:flex w-full items-center mx-auto justify-center text-center">
-                <PingPong />
+              <div className="flex w-full items-center mx-auto justify-center text-center">
+                <div className="hidden md:flex w-full items-center mx-auto justify-center text-center">
+                  <PingPong />
+                </div>
+                <div className="flex md:hidden w-full items-center mx-auto justify-center text-center">
+                  <p className="text-sm mb-4">
+                    Play on desktop for best experience
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="text-center">
