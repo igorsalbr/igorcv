@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#F9F6EE]">
+    <html lang="en" className="bg-[#F9F6EE] overflow-y-hidden">
       <body className={inter.className}>{children}</body>
     </html>
   );
