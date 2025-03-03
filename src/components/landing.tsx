@@ -108,7 +108,7 @@ export function Landing() {
   // Increment tower height
   const handleTowerIncrement = async () => {
     try {
-      const res = await fetch(`${API_URL}/increment`, {
+      const res = await fetch(`${API_URL}/tower/increment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
