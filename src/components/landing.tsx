@@ -481,8 +481,8 @@ export function Landing() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               Ping Pong
             </h2>
-            <p className="text-gray-600 text-sm mb-4">
-              Created on html canvas. Impossible to win, but you can try to :p
+            <p className="text-gray-600 text-sm mb-4 w-full text-center">
+              Created on HTML canvas. Impossible to win, but you can try to :p
             </p>
             {userID ? (
               <div className="flex w-full items-center mx-auto justify-center text-center">
