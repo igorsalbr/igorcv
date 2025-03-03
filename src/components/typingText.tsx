@@ -7,8 +7,10 @@ const TypingEffect = () => {
 
   const texts = [
     "This is my Interactive CV",
+    "Full Stack Developer",
+    "AI Enthusiast",
+    "Problem Solver",
     "Engage with the challenging puzzles!",
-    "Sign up for keeping track of your progress",
     "Explore my skills and experience",
     "Leave me a feedback or a message :)",
     "Enjoy the journey and have fun!"

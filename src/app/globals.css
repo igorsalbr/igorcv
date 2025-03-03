@@ -106,3 +106,7 @@ html {
   z-index: 9999;
   animation: confettiFall 5s linear infinite;
 }
+
+iframe {
+  overflow: hidden; /* Impede a rolagem dentro do iframe */
+}

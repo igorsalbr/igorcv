@@ -221,20 +221,6 @@ export default function Component() {
               About
             </Link>
             <Link
-              href="/#skills"
-              className="text-sm md:text-[16px] font-medium hover:underline"
-              prefetch={false}
-            >
-              Skills
-            </Link>
-            <Link
-              href="/#hobbies"
-              className="text-sm md:text-[16px] font-medium hover:underline"
-              prefetch={false}
-            >
-              Hobbies
-            </Link>
-            <Link
               href="/#contact"
               className="text-sm md:text-[16px] font-medium hover:underline"
               prefetch={false}
