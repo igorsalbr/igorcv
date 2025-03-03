@@ -386,7 +386,7 @@ export function Landing() {
                       href="https://frontend-4jjfp3y2y-lastro.vercel.app/"
                       target="_blank"
                     >
-                      <Button variant="outline" className="text-sm">
+                      <Button variant="outline" className="text-sm text-[#555]">
                         Visit
                       </Button>
                     </Link>
@@ -413,7 +413,7 @@ export function Landing() {
                     >
                       <Button
                         variant="outline"
-                        className="flex text-sm mb-2 mt-auto"
+                        className="flex text-sm mb-2 mt-auto text-[#555]"
                       >
                         Visit
                       </Button>
@@ -443,7 +443,7 @@ export function Landing() {
                       href="https://app.lastro.co/calculator-rent-adjustment"
                       target="_blank"
                     >
-                      <Button variant="outline" className="text-sm">
+                      <Button variant="outline" className="text-sm text-[#555]">
                         Visit
                       </Button>
                     </Link>
@@ -469,6 +469,7 @@ export function Landing() {
                     </p>
                   </div>
                 </CardContent>
+                <p className="ml-4 text-[#555]">Authenticated plataform.</p>
               </Card>
             </div>
           </div>
@@ -480,6 +481,9 @@ export function Landing() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               Ping Pong
             </h2>
+            <p className="text-gray-600 text-sm mb-4">
+              Created on html canvas. Impossible to win, but you can try to :p
+            </p>
             {userID ? (
               <div className="flex w-full items-center mx-auto justify-center text-center">
                 <div className="hidden md:flex w-full items-center mx-auto justify-center text-center">
