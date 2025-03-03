@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -15,7 +13,7 @@ interface CardType {
   isMatched: boolean;
 }
 
-const emojis = ["🚀", "⚡️", "🎮", "🎨", "🎯", "🎪", "🎭", "🎪"];
+const emojis = ["🚀", "⚡️", "🎮", "🎨", "🎯", "🎪", "🎭", "🎷"];
 const createDeck = () => {
   const cards = [...emojis, ...emojis]
     .map((content, index) => ({
@@ -36,7 +34,6 @@ export function MemoryGame({ userID }: MemoryGameProps) {
   const [isWon, setIsWon] = useState(false);
 
   useEffect(() => {
-    // Load best score from localStorage
     const savedBestScore = localStorage.getItem(
       `memoryGame_bestScore_${userID}`
     );
@@ -59,37 +56,36 @@ export function MemoryGame({ userID }: MemoryGameProps) {
     if (newFlippedCards.length === 2) {
       setMoves((prev) => prev + 1);
       const [first, second] = newFlippedCards;
-      if (cards[first].content === cards[second].content) {
-        // Match found
+      if (newCards[first].content === newCards[second].content) {
         setTimeout(() => {
-          const matchedCards = [...cards];
-          matchedCards[first].isMatched = true;
-          matchedCards[second].isMatched = true;
+          const matchedCards = newCards.map((card) =>
+            card.id === first || card.id === second
+              ? { ...card, isMatched: true }
+              : card
+          );
           setCards(matchedCards);
           setFlippedCards([]);
 
-          // Check for win
           if (matchedCards.every((card) => card.isMatched)) {
             setIsWon(true);
-            // Update best score
             if (!bestScore || moves + 1 < bestScore) {
               setBestScore(moves + 1);
               localStorage.setItem(
                 `memoryGame_bestScore_${userID}`,
-                (moves + 1).toString()
+                String(moves + 1)
               );
             }
-            // Trigger confetti
             confetti();
           }
         }, 500);
       } else {
-        // No match
         setTimeout(() => {
-          const unflippedCards = [...cards];
-          unflippedCards[first].isFlipped = false;
-          unflippedCards[second].isFlipped = false;
-          setCards(unflippedCards);
+          const resetCards = newCards.map((card) =>
+            card.id === first || card.id === second
+              ? { ...card, isFlipped: false }
+              : card
+          );
+          setCards(resetCards);
           setFlippedCards([]);
         }, 1000);
       }
@@ -118,8 +114,8 @@ export function MemoryGame({ userID }: MemoryGameProps) {
         {cards.map((card) => (
           <Card
             key={card.id}
-            className={`aspect-square flex items-center justify-center text-4xl cursor-pointer transition-all duration-300 transform ${
-              card.isFlipped || card.isMatched ? "rotate-y-180" : ""
+            className={`aspect-square flex items-center justify-center text-4xl cursor-pointer transition-all duration-300 ${
+              card.isFlipped || card.isMatched ? "opacity-100" : "opacity-0"
             } ${card.isMatched ? "opacity-50" : ""}`}
             onClick={() => handleCardClick(card.id)}
           >
@@ -153,13 +149,18 @@ function confetti() {
   for (let i = 0; i < 50; i++) {
     const confetti = document.createElement("div");
     confetti.className = "confetti";
+    confetti.style.position = "fixed";
     confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.animationDuration = Math.random() * 2 + 3 + "s";
+    confetti.style.top = "-10vh";
+    confetti.style.width = "10px";
+    confetti.style.height = "10px";
     confetti.style.backgroundColor =
       colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animation = "fall 5s linear infinite";
+
     document.body.appendChild(confetti);
     setTimeout(() => {
       confetti.remove();
-    }, 4200);
+    }, 5000);
   }
 }
