@@ -107,6 +107,14 @@ html {
   animation: confettiFall 5s linear infinite;
 }
 
+.iframe-container {
+  width: 100%; /* or a fixed size */
+  height: 600px; /* adjust as necessary */
+  overflow: hidden; /* hide scrolling inside the iframe */
+}
+
 iframe {
-  overflow: hidden; /* Impede a rolagem dentro do iframe */
+  width: 100%;
+  height: 100%;
+  border: none;
 }

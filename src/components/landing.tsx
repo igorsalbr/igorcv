@@ -10,13 +10,14 @@ import {
   TerminalIcon,
   LinkedinIcon,
   GithubIcon,
-  InstagramIcon
+  InstagramIcon,
+  MenuIcon
 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { TowerVisualizer } from "@/components/TowerVisualizer"; // Import the separated component
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const BEARER_TOKEN = process.env.NEXT_PUBLIC_BEARER_GENERAL_TOKEN;
 
 function logout() {
   localStorage.removeItem("userID");
@@ -30,6 +31,7 @@ export function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userID, setUserID] = useState("");
   const [message, setMessage] = useState("");
+  const [towerHeight, setTowerHeight] = useState(0);
 
   useEffect(() => {
     const storedUserID = localStorage.getItem("userID");
@@ -40,7 +42,7 @@ export function Landing() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIcon((icon) => (icon + 1) % 7);
+      setIcon((prev) => (prev + 1) % 7);
     }, 1200);
     return () => clearInterval(interval);
   }, []);
@@ -48,18 +50,18 @@ export function Landing() {
   const menuItems = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
-    { href: "#game", label: "Play Game" },
-    { href: "#contact", label: "Contact" }
+    { href: "#game", label: "Memory Game" },
+    { href: "#game", label: "Tower" },
+    { href: "#contact", label: "Contact" },
+    { href: "/puzzles", label: "Puzzles" }
   ];
 
   const handleMessageSubmit = async (e: any) => {
     e.preventDefault();
-
     if (!userID) {
-      alert("Please login to send a message.");
+      alert("Please log in to send a message.");
       return;
     }
-
     try {
       const response = await fetch(`${API_URL}/api/messages`, {
         method: "POST",
@@ -68,11 +70,10 @@ export function Landing() {
           Authorization: `Bearer ${localStorage.getItem("generalToken")}`
         },
         body: JSON.stringify({
-          userID: userID,
-          message: message
+          userID,
+          message
         })
       });
-
       if (response.ok) {
         alert("Message sent successfully!");
         setMessage("");
@@ -86,18 +87,78 @@ export function Landing() {
     }
   };
 
+  // Fetch current tower height (community-wide interactive feature)
+  const fetchTowerHeight = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/tower`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
+        }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setTowerHeight(data.current_height);
+      }
+    } catch (err) {
+      console.error("Error fetching tower height:", err);
+    }
+  };
+
+  // Increment tower height
+  const handleTowerIncrement = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/tower/increment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
+        }
+      });
+      if (res.ok) {
+        fetchTowerHeight();
+      }
+    } catch (err) {
+      console.error("Error incrementing tower:", err);
+    }
+  };
+
+  // Decrement tower height
+  const handleTowerDecrement = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/tower/decrement`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
+        }
+      });
+      if (res.ok) {
+        fetchTowerHeight();
+      }
+    } catch (err) {
+      console.error("Error decrementing tower:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTowerHeight();
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-200">
+    <div className="font-sans flex flex-col min-h-screen bg-background text-foreground">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-50 bg-white/95 border-b border-gray-200 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-          {/* Logo */}
+          {/* LEFT - LOGO */}
           <Link
             href="#"
-            className="flex items-center space-x-2"
             prefetch={false}
+            className="flex items-center space-x-2"
           >
-            <span className="icon-container flex items-center">
-              <div className="mr-2">Stack:</div>
+            <div className="icon-container flex items-center">
+              <span className="mr-2 text-sm font-semibold tracking-wide">
+                Stack:
+              </span>
               <img
                 className={icon === 0 ? "flex w-14" : "hidden"}
                 src="go.png"
@@ -121,7 +182,7 @@ export function Landing() {
               <img
                 className={icon === 4 ? "flex w-14" : "hidden"}
                 src="next.svg"
-                alt="Next"
+                alt="Next.js"
               />
               <img
                 className={icon === 5 ? "flex w-14" : "hidden"}
@@ -133,49 +194,26 @@ export function Landing() {
                 src="bubble.png"
                 alt="Bubble"
               />
-            </span>
+            </div>
           </Link>
-
-          {/* Puzzles Link - Always Visible */}
-          <Link
-            href="/puzzles"
-            className="absolute left-1/2 transform -translate-x-1/2 text-lg font-medium hover:text-[#E33] transition-colors duration-200"
-          >
-            Puzzles
-          </Link>
-
-          {/* Hamburger Menu Button */}
+          {/* RIGHT - HAMBURGER BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="z-50 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
             aria-label="Toggle menu"
           >
             <div className="w-6 h-5 relative flex flex-col justify-between">
-              <span
-                className={`w-full h-0.5 bg-gray-600 transform transition-all duration-300 ${
-                  menuOpen ? "rotate-45 translate-y-2" : ""
-                }`}
-              />
-              <span
-                className={`w-full h-0.5 bg-gray-600 transition-opacity duration-300 ${
-                  menuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`w-full h-0.5 bg-gray-600 transform transition-all duration-300 ${
-                  menuOpen ? "-rotate-45 -translate-y-2" : ""
-                }`}
-              />
+              <MenuIcon />
             </div>
           </button>
 
-          {/* Full Screen Menu */}
+          {/* FULLSCREEN OVERLAY MENU */}
           <div
-            className={`fixed inset-0 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 z-40 transform transition-transform duration-300 ${
+            className={`fixed inset-0 bg-[#F9F6EE] h-screen backdrop-blur z-40 transform transition-transform duration-300 ${
               menuOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            <nav className="h-full flex flex-col items-center justify-center space-y-8 text-2xl">
+            <nav className=" h-full flex flex-col items-center justify-center space-y-8 text-2xl">
               {menuItems.map((item) => (
                 <Link
                   key={item.href}
@@ -210,57 +248,62 @@ export function Landing() {
         </div>
       </header>
 
+      {/* MAIN CONTENT */}
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
-            Transforming Ideas into Digital Experiences
+        {/* HERO */}
+        <img
+          src="/igor.png"
+          alt="Igor's Profile Picture"
+          className="w-24 h-24 rounded-[24px] mx-auto mt-8"
+        />
+
+        <section className="container mx-auto px-4 py-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
+            Building Innovative Software Every Day
           </h1>
-          <div className="mb-8">
-            <img
-              src="/igor.png"
-              alt="Igor"
-              className="w-48 h-48 mx-auto rounded-full object-cover shadow-lg"
-            />
-          </div>
-          <div className="flex items-center justify-center space-x-4 mb-12">
-            <TerminalIcon className="h-8 w-8" />
+          <p className="max-w-2xl mx-auto text-gray-700 text-sm md:text-base mb-8">
+            Hello! Im Igor, a Full Stack Developer with a Mechatronics
+            background. I craft scalable, user-centric solutions with Go,
+            Python, React, and Next.js. This is my interactive resume, optimized
+            with creative demos for tech recruiters.
+          </p>
+          <div className="mb-6 flex items-center justify-center space-x-4">
+            <TerminalIcon className="h-6 w-6" />
             <TypingEffect />
           </div>
           <Button
-            className="bg-[#E33] hover:bg-[#D22] text-[#FFF] px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            className="bg-[#E33] hover:bg-[#D22] text-[#FFF] px-6 py-3 text-sm md:text-base rounded-full shadow-md hover:shadow-lg transition-all duration-300"
             onClick={() =>
               document
                 .getElementById("about")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Explore My Work
+            Check My Work
           </Button>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="bg-gray-50 py-20">
+        {/* ABOUT SECTION */}
+        <section id="about" className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               About Me
             </h2>
-            <div className="max-w-3xl mx-auto">
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Full-stack developer with a Mechatronics Engineering background
-                from USP. I blend technical expertise with creative
-                problem-solving to build innovative solutions. Experienced in
-                Go, Python, React, and Next.js, Im passionate about creating
-                impactful applications that make a difference.
-              </p>
+            <p className="max-w-xl mx-auto text-gray-700 text-sm md:text-base text-center">
+              Im passionate about tech problem-solving. With a strong
+              engineering mindset, I integrate elegant UI, solid backend, and
+              DevOps practices to deliver robust applications that delight
+              users.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
               <div className="flex flex-wrap justify-center gap-4">
                 <a
                   href="https://app.mindsight.com.br/en/devolutiva/1eb572e9-ba37-421d-a01e-aa772bb1a9ec/"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[#E33] hover:text-[#D22] font-medium h-full flex items-center"
+                  className="text-[#E33] hover:text-[#D22] font-medium mt-2"
                 >
-                  <p className="flex py-2">View Personality Test →</p>
+                  View Personality Test →
                 </a>
                 <Button className="bg-[#E33] hover:bg-[#D22]">
                   Download Resume
@@ -270,89 +313,81 @@ export function Landing() {
           </div>
         </section>
 
-        {/* Projects Section */}
-        <section id="projects" className="py-20">
+        {/* PROJECTS SECTION */}
+        <section id="projects" className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-              Featured Projects
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+              Projects
             </h2>
-
-            {/* AI Chat Interface */}
-            <div className="mb-16">
+            {/* <div className="mb-10">
               <Card className="overflow-hidden shadow-xl">
                 <CardContent className="p-0">
-                  <div className="overflow-hidden w-full h-[600px] relative">
-                    <div
-                      className="iframe-container"
+                  <div className="w-full h-[500px] relative overflow-hidden">
+                    <iframe
+                      src="https://sandbox-app.lastro.co/lais?botId=20cf60ac-f26d-4fa5-8cbf-5988fc9c85f8"
                       style={{
                         width: "100%",
                         height: "100%",
-                        overflow: "auto" // Permite scroll apenas dentro deste contêiner
+                        border: "none",
+                        pointerEvents: "auto",
+                        isolation: "isolate"
                       }}
-                    >
-                      {/* <iframe
-                        src="https://sandbox-app.lastro.co/lais?botId=20cf60ac-f26d-4fa5-8cbf-5988fc9c85f8"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          border: "none",
-                          pointerEvents: "auto",
-                          isolation: "isolate"
-                        }}
-                        title="AI Chat Interface"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      /> */}
-                    </div>
+                      title="AI Chat Interface"
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
                   </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-4">
-                      AI Conversation Interface
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-3">
+                      AI Chat Interface
                     </h3>
-                    <p className="text-gray-600 mb-6">
-                      An advanced AI chat interface built with React and
-                      Next.js, featuring real-time responses and natural
-                      language processing.
+                    <p className="text-gray-600 text-sm mb-4">
+                      React and Next.js interface with real-time NLP responses,
+                      using dynamic bot IDs for multiple AI models.
                     </p>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex gap-4">
                       <Link
                         href="https://frontend-4jjfp3y2y-lastro.vercel.app/responde/chat"
                         target="_blank"
                       >
-                        <Button variant="outline">Try it Live</Button>
+                        <Button variant="outline" className="text-sm">
+                          Demo
+                        </Button>
                       </Link>
                       <Link href="https://github.com/igorsalbr" target="_blank">
-                        <Button variant="outline">View Code</Button>
+                        <Button variant="outline" className="text-sm">
+                          Code
+                        </Button>
                       </Link>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            </div>
-
-            {/* Other Projects Grid */}
-            <div className="grid md:grid-cols-2 gap-8">
+            </div> */}
+            <div className="grid md:grid-cols-2 gap-6">
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-0">
                   <img
                     src="/laisai.png"
                     alt="Project Screenshot"
-                    className="w-full aspect-video object-cover"
+                    className="w-full h-auto object-cover"
                   />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">Landing Page</h3>
-                    <p className="text-gray-600 mb-4">
-                      A comprehensive web page with animations via lootie files,
-                      and a responsive design.
+                  <div className="p-4">
+                    <h4 className="text-lg font-bold mb-2">
+                      Animated Landing Page
+                    </h4>
+                    <p className="text-gray-600 text-sm mb-4">
+                      A dynamic landing page with Lottie animations and modern
+                      UI. Built with next.js and framer-motion and lootie files.
                     </p>
-                    <div className="flex gap-3">
-                      <Link
-                        href="https://frontend-4jjfp3y2y-lastro.vercel.app/"
-                        target="_blank"
-                      >
-                        <Button variant="outline">Visit Website</Button>
-                      </Link>
-                    </div>
+                    <Link
+                      href="https://frontend-4jjfp3y2y-lastro.vercel.app/"
+                      target="_blank"
+                    >
+                      <Button variant="outline" className="text-sm">
+                        Visit
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -360,21 +395,76 @@ export function Landing() {
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-0">
                   <img
-                    src="/placeholder.svg?height=250&width=500"
+                    src="/laisresp.png"
                     alt="Project Screenshot"
-                    className="w-full aspect-video object-cover"
+                    className="w-full h-auto object-cover"
                   />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">
-                      Interactive Dashboard
-                    </h3>
-                    <p className="text-gray-600 mb-4">
-                      Real-time analytics dashboard with data visualization and
-                      user interaction.
+                  <div className="p-4">
+                    <h4 className="text-lg font-bold mb-2">Advanced ChatBot</h4>
+                    <p className="text-gray-600 text-sm mb-4">
+                      Real-time AI for real estate solutions, leveraging
+                      multiple language models. Built with React and Golang.
                     </p>
-                    <Link href="https://github.com/igorsalbr" target="_blank">
-                      <Button variant="outline">View Project</Button>
+                    <Link
+                      href="https://frontend-4jjfp3y2y-lastro.vercel.app/responde/chat"
+                      target="_blank"
+                    >
+                      <Button
+                        variant="outline"
+                        className="flex text-sm mb-2 mt-auto"
+                      >
+                        Visit
+                      </Button>
                     </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6 mt-10">
+              <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-0">
+                  <img
+                    src="/calculator.png"
+                    alt="Project Screenshot"
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="p-4">
+                    <h4 className="text-lg font-bold mb-2">
+                      Live readjustment calculation
+                    </h4>
+                    <p className="text-gray-600 text-sm mb-4">
+                      A data index based calculation using government real time
+                      data for Brazilliant rent based on IGP-M, IPCA or IVAR
+                      indexes. Built with next.js
+                    </p>
+                    <Link
+                      href="https://app.lastro.co/calculator-rent-adjustment"
+                      target="_blank"
+                    >
+                      <Button variant="outline" className="text-sm">
+                        Visit
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-0">
+                  <img
+                    src="/casalais.png"
+                    alt="Project Screenshot"
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="p-4">
+                    <h4 className="text-lg font-bold mb-2">
+                      Costumer Plataform
+                    </h4>
+                    <p className="text-gray-600 text-sm mb-4">
+                      A complete Plataform with authentication for costumers to
+                      keep track of their leads and take automated actions
+                      according to their specific flow. Built with bubble.io.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -382,21 +472,21 @@ export function Landing() {
           </div>
         </section>
 
-        {/* Interactive Game Section */}
-        <section id="game" className="bg-gray-50 py-20">
+        {/* MEMORY GAME SECTION */}
+        <section id="game" className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-              Memory Challenge
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+              Memory Game
             </h2>
             {userID ? (
               <MemoryGame userID={userID} />
             ) : (
               <div className="text-center">
-                <p className="text-lg mb-4">
-                  Login to test your memory and compete for the high score!
+                <p className="text-sm mb-4">
+                  Please log in to play and track high scores!
                 </p>
                 <Link href="/login">
-                  <Button className="bg-[#E33] hover:bg-[#D22]">
+                  <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm">
                     Login to Play
                   </Button>
                 </Link>
@@ -405,57 +495,96 @@ export function Landing() {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-20">
+        {/* NEW COMMUNITY TOWER SECTION */}
+        <section className="py-16">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              Lets Connect!
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Community Tower
             </h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Looking for a developer who can bring your vision to life? Lets
-              discuss how we can work together to create something amazing.
+            <p className="text-sm text-gray-600 mb-4 max-w-xl mx-auto">
+              This interactive section lets everyone add or remove blocks from a
+              global tower. Each visit influences the final height in real-time.
             </p>
-            <div className="flex justify-center space-x-6 mb-12">
+            <div className="max-w-sm mx-auto bg-white p-6 rounded-md shadow-md">
+              <TowerVisualizer
+                towerHeight={towerHeight}
+                onResetTower={() => setTowerHeight(0)}
+              />
+              <div className="flex justify-center gap-4 mt-4">
+                <Button
+                  onClick={handleTowerIncrement}
+                  className="bg-[#1F1] hover:bg-green-600 text-[#FFF] h-10"
+                  disabled={!userID}
+                >
+                  Add Block
+                </Button>
+                <Button
+                  onClick={handleTowerDecrement}
+                  className="bg-[#F11] hover:bg-red-600 text-[#FFF] h-10"
+                  disabled={!userID}
+                >
+                  Remove Block
+                </Button>
+              </div>
+              {!userID && (
+                <p className="text-xs text-gray-500 mt-2">
+                  Please log in to interact with the tower.
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT SECTION */}
+        <section id="contact" className="py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Contact Me</h2>
+            <p className="max-w-xl mx-auto text-gray-600 text-sm md:text-base mb-8">
+              Lets talk about your next big idea or collaboration opportunity!
+            </p>
+            <div className="flex justify-center space-x-6 mb-8">
               <Link
                 href="https://linkedin.com/in/igor-schroter-salviatto-929628171/"
                 target="_blank"
                 className="hover:text-[#E33] transition-colors duration-200"
               >
-                <LinkedinIcon className="h-8 w-8" />
+                <LinkedinIcon className="h-6 w-6" />
               </Link>
               <Link
                 href="https://github.com/igorsalbr"
                 target="_blank"
                 className="hover:text-[#E33] transition-colors duration-200"
               >
-                <GithubIcon className="h-8 w-8" />
+                <GithubIcon className="h-6 w-6" />
               </Link>
               <Link
                 href="https://instagram.com/igorschsal"
                 target="_blank"
                 className="hover:text-[#E33] transition-colors duration-200"
               >
-                <InstagramIcon className="h-8 w-8" />
+                <InstagramIcon className="h-6 w-6" />
               </Link>
             </div>
-
-            <Card className="max-w-2xl mx-auto">
-              <CardContent className="flex flex-col items-center justify-center gap-6 p-6 sm:p-8">
-                <div className="grid w-full gap-4">
-                  <div className="space-y-1">
-                    <Label htmlFor="message">Send me a message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Your message..."
-                      rows={4}
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      className="resize-none"
-                    />
-                  </div>
+            <Card className="max-w-lg mx-auto">
+              <CardContent className="flex flex-col items-center justify-center gap-4 p-6 sm:p-8">
+                <div className="w-full text-left">
+                  <Label
+                    htmlFor="message"
+                    className="block mb-1 font-bold text-sm"
+                  >
+                    Send me a message:
+                  </Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Your message..."
+                    rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="resize-none text-sm"
+                  />
                 </div>
                 <Button
-                  className="w-full bg-[#E33] hover:bg-[#D22] text-[#FFF]"
+                  className="w-full bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm"
                   onClick={(e) => handleMessageSubmit(e)}
                   disabled={!userID}
                 >
@@ -464,9 +593,9 @@ export function Landing() {
                 {!userID && (
                   <Link
                     href="/login"
-                    className="text-[#E33] hover:text-[#D22] text-sm"
+                    className="text-[#E33] hover:text-[#D22] text-xs"
                   >
-                    Click here to login
+                    Click here to Login
                   </Link>
                 )}
               </CardContent>
@@ -475,10 +604,11 @@ export function Landing() {
         </section>
       </main>
 
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <p>&copy; 2024 Igor. All rights reserved.</p>
-          <div className="flex items-center space-x-4">
+      {/* FOOTER */}
+      <footer className="bg-gray-900 text-[#FFF] py-6">
+        <div className="container mx-auto px-4 flex items-center justify-between text-sm">
+          <p>© 2024 Igor. All rights reserved.</p>
+          <div className="flex items-center space-x-3">
             <Link
               href="#about"
               className="hover:text-[#E33] transition-colors duration-200"
