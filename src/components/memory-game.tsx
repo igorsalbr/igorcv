@@ -110,7 +110,7 @@ export function MemoryGame({ userID }: MemoryGameProps) {
         </Button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className={`grid grid-cols-4 gap-4 ${!userID ? "hidden" : ""}`}>
         {cards.map((card) => (
           <Card
             key={card.id}
