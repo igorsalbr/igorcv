@@ -200,7 +200,22 @@ const PingPongGame: React.FC = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} width="800" height="400"></canvas>;
+  return (
+    <div>
+      <canvas
+        className="hidden md:flex"
+        ref={canvasRef}
+        width="800"
+        height="400"
+      ></canvas>
+      <canvas
+        className="flex md:hidden"
+        ref={canvasRef}
+        width="400"
+        height="200"
+      ></canvas>
+    </div>
+  );
 };
 
 export default PingPongGame;
