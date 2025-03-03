@@ -37,12 +37,12 @@ export function TowerVisualizer({
     >
       {/* The actual tower */}
       <div
-        className="transition-all duration-300 bg-green-500"
+        className="transition-all duration-300 bg-[#1f1]"
         style={{ height: `${currentHeight}vh` }}
       />
       {/* Explosion overlay when it reaches 100% */}
       {exploding && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-white text-xl font-bold animate-pulse">
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-[#FFF] text-xl font-bold animate-pulse">
           BOOM!
         </div>
       )}
