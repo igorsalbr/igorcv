@@ -51,7 +51,7 @@ export function Landing() {
   const menuItems = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
-    { href: "#game", label: "Memory Game" },
+    { href: "#game", label: "Ping Pong" },
     { href: "#game", label: "Tower" },
     { href: "#contact", label: "Contact" },
     { href: "/puzzles", label: "Puzzles" }
@@ -475,7 +475,7 @@ export function Landing() {
           </div>
         </section>
 
-        {/* MEMORY GAME SECTION */}
+        {/* ping pong SECTION */}
         <section id="game" className="bg-gray-50 py-6">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
