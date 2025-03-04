@@ -515,7 +515,7 @@ export function Landing() {
             </h2>
             <div className="text-center items-center w-full">
               <Link href="/puzzles">
-                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm">
+                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-md pt-4">
                   Go to puzzles
                 </Button>
               </Link>

@@ -37,10 +37,10 @@ export default function Component() {
       id: 1,
       title: "API Call Challenge",
       completed: false,
-      description:
-        "Make an API call to create or update a user with the parameter 'imanerd': true",
-      question: "What's the correct API endpoint to use?",
-      correctAnswer: "no api yet"
+      description: "Discover my backend base url",
+      question:
+        "What's the correct endpoint? Without https:// and without the last /",
+      correctAnswer: "igor-cv-5a0c3530bcf2.herokuapp.com"
     },
     {
       id: 2,
