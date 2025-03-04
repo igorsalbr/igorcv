@@ -516,8 +516,9 @@ export function Landing() {
             </h2>
             <p className="text-sm text-gray-600 mb-4 max-w-xl mx-auto">
               This interactive section lets everyone add or remove blocks from a
-              global tower. Each visit influences the final height in real-time.
-              Add or remove blocks if you are logged in.
+              global tower. Each block influences the final height in real-time.
+              Add or remove blocks if you are logged in. If the tower reaches
+              limit, it will explode!
             </p>
             <div className="max-w-sm mx-auto bg-white p-6 rounded-md shadow-md">
               <TowerVisualizer
