@@ -157,10 +157,7 @@ export function Landing() {
             prefetch={false}
             className="flex items-center space-x-2"
           >
-            <div className="icon-container flex items-center">
-              <span className="mr-2 text-sm font-semibold tracking-wide">
-                Stack:
-              </span>
+            <div className="icon-container flex items-center ml-2">
               <img
                 className={icon === 0 ? "flex w-14" : "hidden"}
                 src="go.png"
@@ -261,14 +258,8 @@ export function Landing() {
 
         <section className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
-            Building Innovative Software Every Day
+            Welcome to My Interactive CV!
           </h1>
-          <p className="max-w-2xl mx-auto text-gray-700 text-sm md:text-base mb-8">
-            Hello! Im Igor, a Full Stack Developer with a Mechatronics
-            background. I craft scalable, user-centric solutions with Go,
-            Python, React, and Next.js. This is my interactive resume, optimized
-            with creative demos for tech recruiters.
-          </p>
           <div className="mb-6 flex items-center justify-center space-x-4">
             <TerminalIcon className="h-6 w-6" />
             <TypingEffect />
@@ -286,16 +277,18 @@ export function Landing() {
         </section>
 
         {/* ABOUT SECTION */}
-        <section id="about" className="bg-gray-50 py-16">
+        <section id="about" className="bg-gray-50 py-6">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               About Me
             </h2>
             <p className="max-w-xl mx-auto text-gray-700 text-sm md:text-base text-center">
-              Im passionate about tech problem-solving. With a strong
-              engineering mindset, I integrate elegant UI, solid backend, and
-              DevOps practices to deliver robust applications that delight
-              users.
+              Hello! Im Igor, a Full Stack Developer with a Mechatronics
+              background. I craft scalable, user-centric solutions with Go,
+              Python, React, and Next.js. I am passionate about tech
+              problem-solving. With a strong engineering mindset, I integrate
+              elegant UI, solid backend, frontend, and product management
+              practices to deliver robust applications.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <div className="flex flex-wrap justify-center gap-4">
@@ -307,7 +300,15 @@ export function Landing() {
                 >
                   View Personality Test →
                 </a>
-                <Button className="bg-[#E33] hover:bg-[#D22]">
+                <Button
+                  className="bg-[#E33] hover:bg-[#D22]"
+                  onClick={() =>
+                    window.open(
+                      "linkedin.com/in/igor-salviatto-929628171",
+                      "_blank"
+                    )
+                  }
+                >
                   Download Resume
                 </Button>
               </div>
