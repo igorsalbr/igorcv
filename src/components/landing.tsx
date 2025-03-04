@@ -256,7 +256,7 @@ export function Landing() {
           className="w-24 h-24 rounded-[24px] mx-auto mt-8"
         />
 
-        <section className="container mx-auto px-4 py-16 text-center">
+        <section className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
             Welcome to My Interactive CV!
           </h1>
@@ -277,7 +277,7 @@ export function Landing() {
         </section>
 
         {/* ABOUT SECTION */}
-        <section id="about" className="bg-gray-50 py-6">
+        <section id="about" className="bg-gray-50 py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               About Me
@@ -317,7 +317,7 @@ export function Landing() {
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="projects" className="py-16">
+        <section id="projects" className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
               Projects
@@ -514,9 +514,9 @@ export function Landing() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
               Puzzles
             </h2>
-            <div className="text-center items-center w-full">
+            <div className="text-center items-center w-full pt-4">
               <Link href="/puzzles">
-                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-md pt-4">
+                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-md">
                   Go to puzzles
                 </Button>
               </Link>
@@ -525,7 +525,7 @@ export function Landing() {
         </section>
 
         {/* NEW COMMUNITY TOWER SECTION */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Community Tower
@@ -567,7 +567,7 @@ export function Landing() {
         </section>
 
         {/* CONTACT SECTION */}
-        <section id="contact" className="py-16">
+        <section id="contact" className="py-12">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Contact Me</h2>
             <p className="max-w-xl mx-auto text-gray-600 text-sm md:text-base mb-8">
