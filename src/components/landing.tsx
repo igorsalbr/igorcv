@@ -304,12 +304,12 @@ export function Landing() {
                   className="bg-[#E33] hover:bg-[#D22]"
                   onClick={() =>
                     window.open(
-                      "linkedin.com/in/igor-salviatto-929628171",
+                      "https://www.linkedin.com/in/igor-schroter-salviatto-929628171/",
                       "_blank"
                     )
                   }
                 >
-                  Download Resume
+                  Resume
                 </Button>
               </div>
             </div>
