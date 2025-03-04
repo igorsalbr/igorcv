@@ -62,7 +62,7 @@ export default function Component() {
       id: 3,
       title: "Console Hacker",
       completed: false,
-      description: "Use the browser console to interact with a hidden function",
+      description: "Use the browser console to interact with the function",
       question: "What's the return value of the secretFunction()?",
       correctAnswer: "h4ck3r"
     },
@@ -95,7 +95,7 @@ export default function Component() {
       id: 5,
       title: "JWT Decoder",
       completed: false,
-      description: "Decode a JSON Web Token to find a hidden message",
+      description: "Decode a JSON Web Token to find the message",
       question:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJzZWNyZXQiOiJvaWUifQ.55ja5RWqJJo4ZrsMDOxQXjWQhQsvgIx1AjTqFMbnJus",
       correctAnswer: "oie"
