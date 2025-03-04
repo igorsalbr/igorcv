@@ -66,17 +66,17 @@ export default function Component() {
       question: "What's the return value of the secretFunction()?",
       correctAnswer: "h4ck3r"
     },
+    // {
+    //   id: 4,
+    //   title: "SQL Injection Simulation",
+    //   completed: false,
+    //   description:
+    //     "Simulate a SQL injection attack in a controlled environment",
+    //   question: "What input would you use to bypass the login?",
+    //   correctAnswer: "' OR '1'='1"
+    // },
     {
       id: 4,
-      title: "SQL Injection Simulation",
-      completed: false,
-      description:
-        "Simulate a SQL injection attack in a controlled environment",
-      question: "What input would you use to bypass the login?",
-      correctAnswer: "' OR '1'='1"
-    },
-    {
-      id: 5,
       title: "Cryptography Challenge",
       completed: false,
       description: "Decrypt a message using a given cipher",
@@ -92,7 +92,7 @@ export default function Component() {
     //   correctAnswer: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
     // },
     {
-      id: 6,
+      id: 5,
       title: "JWT Decoder",
       completed: false,
       description: "Decode a JSON Web Token to find a hidden message",

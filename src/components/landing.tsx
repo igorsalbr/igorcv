@@ -508,6 +508,21 @@ export function Landing() {
           </div>
         </section>
 
+        <section className="bg-gray-50 py-6">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+              Puzzles
+            </h2>
+            <div className="text-center items-center w-full">
+              <Link href="/puzzles">
+                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm">
+                  Go to puzzles
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* NEW COMMUNITY TOWER SECTION */}
         <section className="py-16">
           <div className="container mx-auto px-4 text-center">
