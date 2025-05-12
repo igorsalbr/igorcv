@@ -96,7 +96,7 @@ export function AboutSection() {
                 >
                   View Personality Test →
                 </a>
-                <Button
+                {/* <Button
                   className="bg-brand-primary hover:bg-brand-primary/90 text-white"
                   onClick={() =>
                     window.open(
@@ -106,7 +106,7 @@ export function AboutSection() {
                   }
                 >
                   Resume
-                </Button>
+                </Button> */}
               </div>
             </motion.div>
           </div>

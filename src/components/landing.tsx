@@ -291,7 +291,7 @@ export function Landing() {
               practices to deliver robust applications.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center items-center gap-4">
                 <a
                   href="https://app.mindsight.com.br/en/devolutiva/1eb572e9-ba37-421d-a01e-aa772bb1a9ec/"
                   target="_blank"
@@ -300,7 +300,7 @@ export function Landing() {
                 >
                   View Personality Test →
                 </a>
-                <Button
+                {/* <Button
                   className="bg-[#E33] hover:bg-[#D22]"
                   onClick={() =>
                     window.open(
@@ -310,7 +310,7 @@ export function Landing() {
                   }
                 >
                   Resume
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
