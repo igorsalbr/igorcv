@@ -1,106 +1,122 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { Header } from "@/components/layout/header"
-import { PuzzleGrid } from "@/components/features/puzzles/puzzle-grid"
-import { PuzzleDialog } from "@/components/features/puzzles/puzzle-dialog"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { Coffee } from "lucide-react"
-import { useAuth } from "@/hooks/use-auth"
-import { getPuzzles, updatePuzzleProgress } from "@/lib/api/puzzles"
-import { pageTransition, staggerContainer, fadeUpVariants } from "@/lib/animations"
-import { Skeleton } from "@/components/ui/skeleton"
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Header } from "@/components/layout/header";
+import { PuzzleGrid } from "@/components/features/puzzles/puzzle-grid";
+import { PuzzleDialog } from "@/components/features/puzzles/puzzle-dialog";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Coffee } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
+import { getPuzzles, updatePuzzleProgress } from "@/lib/api/puzzles";
+import {
+  pageTransition,
+  staggerContainer,
+  fadeUpVariants
+} from "@/lib/animations";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Expose function to window for puzzle challenge
 function useExposeToWindow(name: string, func: Function) {
   useEffect(() => {
-    ;(window as any)[name] = func
+    (window as any)[name] = func;
     return () => {
-      delete (window as any)[name]
-    }
-  }, [name, func])
+      delete (window as any)[name];
+    };
+  }, [name, func]);
 }
 
 function secretFunction() {
-  return "h4ck3r"
+  return "h4ck3r";
 }
 
 export default function PuzzlesPage() {
-  const { isAuthenticated, logout } = useAuth()
-  const [progress, setProgress] = useState(0)
-  const [openModal, setOpenModal] = useState<number | null>(null)
-  const [answer, setAnswer] = useState("")
-  const [error, setError] = useState("")
-  const [challenges, setChallenges] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const { isAuthenticated, logout } = useAuth();
+  const [progress, setProgress] = useState(0);
+  const [openModal, setOpenModal] = useState<number | null>(null);
+  const [answer, setAnswer] = useState("");
+  const [error, setError] = useState("");
+  const [challenges, setChallenges] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  useExposeToWindow("secretFunction", secretFunction)
+  useExposeToWindow("secretFunction", secretFunction);
 
   // Load puzzles from API
   useEffect(() => {
     async function loadPuzzles() {
       try {
-        setLoading(true)
-        const puzzleData = await getPuzzles()
-        setChallenges(puzzleData)
+        setLoading(true);
+        const puzzleData = await getPuzzles();
+        setChallenges(puzzleData);
 
         // Calculate progress
-        const completedCount = puzzleData.filter((p: any) => p.completed).length
-        setProgress(completedCount > 0 ? (completedCount / puzzleData.length) * 100 : 0)
+        const completedCount = puzzleData.filter(
+          (p: any) => p.completed
+        ).length;
+        setProgress(
+          completedCount > 0 ? (completedCount / puzzleData.length) * 100 : 0
+        );
       } catch (error) {
-        console.error("Failed to load puzzles:", error)
+        console.error("Failed to load puzzles:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
 
-    loadPuzzles()
-  }, [isAuthenticated])
+    loadPuzzles();
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (progress === 100) {
-      confetti()
+      confetti();
     }
-  }, [progress])
+  }, [progress]);
 
   const openChallenge = (id: number) => {
-    setOpenModal(id)
-    setAnswer("")
-    setError("")
-  }
+    setOpenModal(id);
+    setAnswer("");
+    setError("");
+  };
 
   const closeChallenge = () => {
-    setOpenModal(null)
-    setAnswer("")
-    setError("")
-  }
+    setOpenModal(null);
+    setAnswer("");
+    setError("");
+  };
 
   const submitAnswer = async () => {
-    const challenge = challenges.find((c) => c.id === openModal)
-    if (challenge && answer.toLowerCase() === challenge.correctAnswer.toLowerCase()) {
+    const challenge = challenges.find((c) => c.id === openModal);
+    if (
+      challenge &&
+      answer.toLowerCase() === challenge.correctAnswer.toLowerCase()
+    ) {
       try {
-        await updatePuzzleProgress(openModal, true)
+        if (openModal === null) return;
+        await updatePuzzleProgress(openModal, true);
 
         // Update local state
-        const updatedChallenges = challenges.map((c) => (c.id === openModal ? { ...c, completed: true } : c))
-        setChallenges(updatedChallenges)
+        const updatedChallenges = challenges.map((c) =>
+          c.id === openModal ? { ...c, completed: true } : c
+        );
+        setChallenges(updatedChallenges);
 
         // Update progress
-        const completedCount = updatedChallenges.filter((c) => c.completed).length
-        setProgress((completedCount / updatedChallenges.length) * 100)
+        const completedCount = updatedChallenges.filter(
+          (c) => c.completed
+        ).length;
+        setProgress((completedCount / updatedChallenges.length) * 100);
 
-        closeChallenge()
+        closeChallenge();
       } catch (error) {
-        console.error("Failed to update puzzle progress:", error)
-        setError("Failed to save progress. Please try again.")
+        console.error("Failed to update puzzle progress:", error);
+        setError("Failed to save progress. Please try again.");
       }
     } else {
-      setError("Incorrect answer. Try again!")
+      setError("Incorrect answer. Try again!");
     }
-  }
+  };
 
   return (
     <motion.div
@@ -113,8 +129,16 @@ export default function PuzzlesPage() {
       <Header />
 
       <main className="flex-1 container mx-auto px-4 py-8">
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-4xl mx-auto">
-          <motion.h1 variants={fadeUpVariants} className="text-3xl md:text-4xl font-bold mb-6 text-center">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl mx-auto"
+        >
+          <motion.h1
+            variants={fadeUpVariants}
+            className="text-3xl md:text-4xl font-bold mb-6 text-center"
+          >
             Interactive <span className="text-red-500">Puzzles</span>
           </motion.h1>
 
@@ -122,15 +146,26 @@ export default function PuzzlesPage() {
             variants={fadeUpVariants}
             className="text-gray-600 dark:text-gray-300 text-center mb-8 max-w-2xl mx-auto"
           >
-            Test your problem-solving skills with these coding and logic challenges. Can you solve them all?
+            Test your problem-solving skills with these coding and logic
+            challenges. Can you solve them all?
           </motion.p>
 
           <motion.div variants={fadeUpVariants} className="mb-8">
             <Progress value={progress} className="h-2" />
             <div className="flex justify-between items-center mt-1">
-              <p className="text-sm text-gray-500 dark:text-gray-400">{Math.round(progress)}% Complete</p>
-              <Link href="https://www.buymeacoffee.com" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="text-red-500 hover:text-red-600 flex items-center gap-1">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {Math.round(progress)}% Complete
+              </p>
+              <Link
+                href="https://mpago.la/1ozZqt4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-red-500 flex items-center gap-1"
+                >
                   <Coffee className="h-4 w-4" />
                   <span>Buy me a coffee</span>
                 </Button>
@@ -141,7 +176,10 @@ export default function PuzzlesPage() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md">
+                <div
+                  key={i}
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md"
+                >
                   <div className="p-4 border-b border-gray-200 dark:border-gray-700">
                     <Skeleton className="h-6 w-3/4 mb-1" />
                   </div>
@@ -155,7 +193,10 @@ export default function PuzzlesPage() {
               ))}
             </div>
           ) : (
-            <PuzzleGrid challenges={challenges} onStartChallenge={openChallenge} />
+            <PuzzleGrid
+              challenges={challenges}
+              onStartChallenge={openChallenge}
+            />
           )}
         </motion.div>
 
@@ -172,20 +213,21 @@ export default function PuzzlesPage() {
         <div className="hidden" id="salsal" />
       </main>
     </motion.div>
-  )
+  );
 }
 
 function confetti() {
-  const colors = ["#ff0000", "#ffffff", "#000000", "#ff3333", "#cc0000"]
+  const colors = ["#ff0000", "#ffffff", "#000000", "#ff3333", "#cc0000"];
   for (let i = 0; i < 50; i++) {
-    const confetti = document.createElement("div")
-    confetti.className = "confetti"
-    confetti.style.left = Math.random() * 100 + "vw"
-    confetti.style.animationDuration = Math.random() * 2 + 3 + "s"
-    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
-    document.body.appendChild(confetti)
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.animationDuration = Math.random() * 2 + 3 + "s";
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(confetti);
     setTimeout(() => {
-      confetti.remove()
-    }, 4200)
+      confetti.remove();
+    }, 4200);
   }
 }
