@@ -1,52 +1,46 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import TypingEffect from "@/components/typingText";
-import PingPong from "@/components/ping-pong";
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import TypingEffect from "@/components/typingText"
+import PingPong from "@/components/ping-pong"
 
-import {
-  TerminalIcon,
-  LinkedinIcon,
-  GithubIcon,
-  InstagramIcon,
-  MenuIcon
-} from "lucide-react";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { TowerVisualizer } from "@/components/TowerVisualizer"; // Import the separated component
+import { TerminalIcon, LinkedinIcon, GithubIcon, InstagramIcon, MenuIcon } from "lucide-react"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { TowerVisualizer } from "@/components/TowerVisualizer" // Import the separated component
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 function logout() {
-  localStorage.removeItem("userID");
-  localStorage.removeItem("generalToken");
-  localStorage.removeItem("restrictedToken");
-  window.location.href = "/";
+  localStorage.removeItem("userID")
+  localStorage.removeItem("generalToken")
+  localStorage.removeItem("restrictedToken")
+  window.location.href = "/"
 }
 
 export function Landing() {
-  const [icon, setIcon] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [userID, setUserID] = useState("");
-  const [message, setMessage] = useState("");
-  const [towerHeight, setTowerHeight] = useState(0);
+  const [icon, setIcon] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [userID, setUserID] = useState("")
+  const [message, setMessage] = useState("")
+  const [towerHeight, setTowerHeight] = useState(0)
 
   useEffect(() => {
-    const storedUserID = localStorage.getItem("userID");
+    const storedUserID = localStorage.getItem("userID")
     if (storedUserID) {
-      setUserID(storedUserID);
+      setUserID(storedUserID)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIcon((prev) => (prev + 1) % 7);
-    }, 1200);
-    return () => clearInterval(interval);
-  }, []);
+      setIcon((prev) => (prev + 1) % 7)
+    }, 1200)
+    return () => clearInterval(interval)
+  }, [])
 
   const menuItems = [
     { href: "#about", label: "About" },
@@ -54,39 +48,39 @@ export function Landing() {
     { href: "#game", label: "Ping Pong" },
     { href: "#game", label: "Tower" },
     { href: "#contact", label: "Contact" },
-    { href: "/puzzles", label: "Puzzles" }
-  ];
+    { href: "/puzzles", label: "Puzzles" },
+  ]
 
   const handleMessageSubmit = async (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!userID) {
-      alert("Please log in to send a message.");
-      return;
+      alert("Please log in to send a message.")
+      return
     }
     try {
       const response = await fetch(`${API_URL}/api/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`,
         },
         body: JSON.stringify({
           userID,
-          message
-        })
-      });
+          message,
+        }),
+      })
       if (response.ok) {
-        alert("Message sent successfully!");
-        setMessage("");
+        alert("Message sent successfully!")
+        setMessage("")
       } else {
-        console.error("Failed to send message:", response.status);
-        alert("Failed to send message. Please try again.");
+        console.error("Failed to send message:", response.status)
+        alert("Failed to send message. Please try again.")
       }
     } catch (error) {
-      console.error("Error sending message:", error);
-      alert("Error sending message. Please try again.");
+      console.error("Error sending message:", error)
+      alert("Error sending message. Please try again.")
     }
-  };
+  }
 
   // Fetch current tower height (community-wide interactive feature)
   const fetchTowerHeight = async () => {
@@ -94,17 +88,17 @@ export function Landing() {
       const res = await fetch(`${API_URL}/tower`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
-        }
-      });
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`,
+        },
+      })
       if (res.ok) {
-        const data = await res.json();
-        setTowerHeight(data.height);
+        const data = await res.json()
+        setTowerHeight(data.height)
       }
     } catch (err) {
-      console.error("Error fetching tower height:", err);
+      console.error("Error fetching tower height:", err)
     }
-  };
+  }
 
   // Increment tower height
   const handleTowerIncrement = async () => {
@@ -113,16 +107,16 @@ export function Landing() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
-        }
-      });
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`,
+        },
+      })
       if (res.ok) {
-        fetchTowerHeight();
+        fetchTowerHeight()
       }
     } catch (err) {
-      console.error("Error incrementing tower:", err);
+      console.error("Error incrementing tower:", err)
     }
-  };
+  }
 
   // Decrement tower height
   const handleTowerDecrement = async () => {
@@ -131,20 +125,20 @@ export function Landing() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("generalToken")}`
-        }
-      });
+          Authorization: `Bearer ${localStorage.getItem("generalToken")}`,
+        },
+      })
       if (res.ok) {
-        fetchTowerHeight();
+        fetchTowerHeight()
       }
     } catch (err) {
-      console.error("Error decrementing tower:", err);
+      console.error("Error decrementing tower:", err)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchTowerHeight();
-  }, []);
+    fetchTowerHeight()
+  }, [])
 
   return (
     <div className="font-sans flex flex-col min-h-screen bg-background text-foreground">
@@ -152,47 +146,15 @@ export function Landing() {
       <header className="sticky top-0 z-50 bg-white/95 border-b border-gray-200 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
           {/* LEFT - LOGO */}
-          <Link
-            href="#"
-            prefetch={false}
-            className="flex items-center space-x-2"
-          >
+          <Link href="#" prefetch={false} className="flex items-center space-x-2">
             <div className="icon-container flex items-center ml-2">
-              <img
-                className={icon === 0 ? "flex w-14" : "hidden"}
-                src="go.png"
-                alt="GO"
-              />
-              <img
-                className={icon === 1 ? "flex w-14" : "hidden"}
-                src="ts.png"
-                alt="TypeScript"
-              />
-              <img
-                className={icon === 2 ? "flex w-14" : "hidden"}
-                src="react.png"
-                alt="React.js"
-              />
-              <img
-                className={icon === 3 ? "flex w-14" : "hidden"}
-                src="py.png"
-                alt="Python"
-              />
-              <img
-                className={icon === 4 ? "flex w-14" : "hidden"}
-                src="next.svg"
-                alt="Next.js"
-              />
-              <img
-                className={icon === 5 ? "flex w-14" : "hidden"}
-                src="retool.png"
-                alt="Retool"
-              />
-              <img
-                className={icon === 6 ? "flex w-14" : "hidden"}
-                src="bubble.png"
-                alt="Bubble"
-              />
+              <img className={icon === 0 ? "flex w-14" : "hidden"} src="go.png" alt="GO" />
+              <img className={icon === 1 ? "flex w-14" : "hidden"} src="ts.png" alt="TypeScript" />
+              <img className={icon === 2 ? "flex w-14" : "hidden"} src="react.png" alt="React.js" />
+              <img className={icon === 3 ? "flex w-14" : "hidden"} src="py.png" alt="Python" />
+              <img className={icon === 4 ? "flex w-14" : "hidden"} src="next.svg" alt="Next.js" />
+              <img className={icon === 5 ? "flex w-14" : "hidden"} src="retool.png" alt="Retool" />
+              <img className={icon === 6 ? "flex w-14" : "hidden"} src="bubble.png" alt="Bubble" />
             </div>
           </Link>
           {/* RIGHT - HAMBURGER BUTTON */}
@@ -234,8 +196,8 @@ export function Landing() {
               ) : (
                 <button
                   onClick={() => {
-                    logout();
-                    setMenuOpen(false);
+                    logout()
+                    setMenuOpen(false)
                   }}
                   className="text-[#E33] hover:text-[#C22] transition-colors duration-200"
                 >
@@ -250,11 +212,7 @@ export function Landing() {
       {/* MAIN CONTENT */}
       <main className="flex-1">
         {/* HERO */}
-        <img
-          src="/igor.png"
-          alt="Igor's Profile Picture"
-          className="w-24 h-24 rounded-[24px] mx-auto mt-8"
-        />
+        <img src="/igor.png" alt="Igor's Profile Picture" className="w-24 h-24 rounded-[24px] mx-auto mt-8" />
 
         <section className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
@@ -266,11 +224,7 @@ export function Landing() {
           </div>
           <Button
             className="bg-[#E33] hover:bg-[#D22] text-[#FFF] px-6 py-3 text-sm md:text-base rounded-full shadow-md hover:shadow-lg transition-all duration-300"
-            onClick={() =>
-              document
-                .getElementById("about")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
           >
             Check My Work
           </Button>
@@ -279,16 +233,12 @@ export function Landing() {
         {/* ABOUT SECTION */}
         <section id="about" className="bg-gray-50 py-12">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-              About Me
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">About Me</h2>
             <p className="max-w-xl mx-auto text-gray-700 text-sm md:text-base text-center">
-              Hello! Im Igor, a Full Stack Developer with a Mechatronics
-              background. I craft scalable, user-centric solutions with Go,
-              Python, React, and Next.js. I am passionate about tech
-              problem-solving. With a strong engineering mindset, I integrate
-              elegant UI, solid backend, frontend, and product management
-              practices to deliver robust applications.
+              Hello! Im Igor, a Full Stack Developer with a Mechatronics background. I craft scalable, user-centric
+              solutions with Go, Python, React, and Next.js. I am passionate about tech problem-solving. With a strong
+              engineering mindset, I integrate elegant UI, solid backend, frontend, and product management practices to
+              deliver robust applications.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <div className="flex flex-wrap justify-center gap-4">
@@ -303,10 +253,7 @@ export function Landing() {
                 <Button
                   className="bg-[#E33] hover:bg-[#D22]"
                   onClick={() =>
-                    window.open(
-                      "https://www.linkedin.com/in/igor-schroter-salviatto-929628171/",
-                      "_blank"
-                    )
+                    window.open("https://www.linkedin.com/in/igor-schroter-salviatto-929628171/", "_blank")
                   }
                 >
                   Resume
@@ -319,9 +266,7 @@ export function Landing() {
         {/* PROJECTS SECTION */}
         <section id="projects" className="py-12">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-              Projects
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Projects</h2>
             {/* <div className="mb-10">
               <Card className="overflow-hidden shadow-xl">
                 <CardContent className="p-0">
@@ -370,23 +315,14 @@ export function Landing() {
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-0">
-                  <img
-                    src="/laisai.png"
-                    alt="Project Screenshot"
-                    className="w-full h-auto object-cover"
-                  />
+                  <img src="/laisai.png" alt="Project Screenshot" className="w-full h-auto object-cover" />
                   <div className="p-4">
-                    <h4 className="text-lg font-bold mb-2">
-                      Animated Landing Page
-                    </h4>
+                    <h4 className="text-lg font-bold mb-2">Animated Landing Page</h4>
                     <p className="text-gray-600 text-sm mb-4">
-                      A dynamic landing page with Lottie animations and modern
-                      UI. Built with next.js and framer-motion and lootie files.
+                      A dynamic landing page with Lottie animations and modern UI. Built with next.js and framer-motion
+                      and lootie files.
                     </p>
-                    <Link
-                      href="https://frontend-4jjfp3y2y-lastro.vercel.app/"
-                      target="_blank"
-                    >
+                    <Link href="https://frontend-4jjfp3y2y-lastro.vercel.app/" target="_blank">
                       <Button variant="outline" className="text-sm text-[#555]">
                         Visit
                       </Button>
@@ -397,25 +333,15 @@ export function Landing() {
 
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-0">
-                  <img
-                    src="/laisresp.png"
-                    alt="Project Screenshot"
-                    className="w-full h-auto object-cover"
-                  />
+                  <img src="/laisresp.png" alt="Project Screenshot" className="w-full h-auto object-cover" />
                   <div className="p-4">
                     <h4 className="text-lg font-bold mb-2">Advanced ChatBot</h4>
                     <p className="text-gray-600 text-sm mb-4">
-                      Real-time AI for real estate solutions, leveraging
-                      multiple language models. Built with React and Golang.
+                      Real-time AI for real estate solutions, leveraging multiple language models. Built with React and
+                      Golang.
                     </p>
-                    <Link
-                      href="https://frontend-4jjfp3y2y-lastro.vercel.app/responde/chat"
-                      target="_blank"
-                    >
-                      <Button
-                        variant="outline"
-                        className="flex text-sm mb-2 mt-auto text-[#555]"
-                      >
+                    <Link href="https://frontend-4jjfp3y2y-lastro.vercel.app/responde/chat" target="_blank">
+                      <Button variant="outline" className="flex text-sm mb-2 mt-auto text-[#555]">
                         Visit
                       </Button>
                     </Link>
@@ -426,24 +352,14 @@ export function Landing() {
             <div className="grid md:grid-cols-2 gap-6 mt-10">
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-0">
-                  <img
-                    src="/calculator.png"
-                    alt="Project Screenshot"
-                    className="w-full h-auto object-cover"
-                  />
+                  <img src="/calculator.png" alt="Project Screenshot" className="w-full h-auto object-cover" />
                   <div className="p-4">
-                    <h4 className="text-lg font-bold mb-2">
-                      Live readjustment calculation
-                    </h4>
+                    <h4 className="text-lg font-bold mb-2">Live readjustment calculation</h4>
                     <p className="text-gray-600 text-sm mb-4">
-                      A data index based calculation using government real time
-                      data for Brazilliant rent based on IGP-M, IPCA or IVAR
-                      indexes. Built with next.js
+                      A data index based calculation using government real time data for Brazilliant rent based on
+                      IGP-M, IPCA or IVAR indexes. Built with next.js
                     </p>
-                    <Link
-                      href="https://app.lastro.co/calculator-rent-adjustment"
-                      target="_blank"
-                    >
+                    <Link href="https://app.lastro.co/calculator-rent-adjustment" target="_blank">
                       <Button variant="outline" className="text-sm text-[#555]">
                         Visit
                       </Button>
@@ -454,19 +370,12 @@ export function Landing() {
 
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-0">
-                  <img
-                    src="/casalais.png"
-                    alt="Project Screenshot"
-                    className="w-full h-auto object-cover"
-                  />
+                  <img src="/casalais.png" alt="Project Screenshot" className="w-full h-auto object-cover" />
                   <div className="p-4">
-                    <h4 className="text-lg font-bold mb-2">
-                      Costumer Plataform
-                    </h4>
+                    <h4 className="text-lg font-bold mb-2">Costumer Plataform</h4>
                     <p className="text-gray-600 text-sm mb-4">
-                      A complete Plataform with authentication for costumers to
-                      keep track of their leads and take automated actions
-                      according to their specific flow. Built with bubble.io.
+                      A complete Plataform with authentication for costumers to keep track of their leads and take
+                      automated actions according to their specific flow. Built with bubble.io.
                     </p>
                   </div>
                 </CardContent>
@@ -479,9 +388,7 @@ export function Landing() {
         {/* ping pong SECTION */}
         <section id="game" className="bg-gray-50 py-6">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-              Ping Pong
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">Ping Pong</h2>
             <p className="text-gray-600 text-sm mb-4 w-full text-center">
               Created on HTML canvas. Impossible to win, but you can try to :p
             </p>
@@ -491,18 +398,14 @@ export function Landing() {
                   <PingPong />
                 </div>
                 <div className="flex md:hidden w-full items-center mx-auto justify-center text-center">
-                  <p className="text-sm mb-4">
-                    Play on desktop for best experience
-                  </p>
+                  <p className="text-sm mb-4">Play on desktop for best experience</p>
                 </div>
               </div>
             ) : (
               <div className="text-center">
                 <p className="text-sm mb-4">Must be logged to play!</p>
                 <Link href="/login">
-                  <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm">
-                    Login to Play
-                  </Button>
+                  <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-sm">Login to Play</Button>
                 </Link>
               </div>
             )}
@@ -511,14 +414,10 @@ export function Landing() {
 
         <section className="bg-gray-50 py-6">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-              Puzzles
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">Puzzles</h2>
             <div className="text-center items-center w-full pt-4">
               <Link href="/puzzles">
-                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-md">
-                  Go to puzzles
-                </Button>
+                <Button className="bg-[#E33] hover:bg-[#D22] text-[#FFF] text-md">Go to puzzles</Button>
               </Link>
             </div>
           </div>
@@ -527,20 +426,14 @@ export function Landing() {
         {/* NEW COMMUNITY TOWER SECTION */}
         <section className="py-12">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Community Tower
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Community Tower</h2>
             <p className="text-sm text-gray-600 mb-4 max-w-xl mx-auto">
-              This interactive section lets everyone add or remove blocks from a
-              global tower. Each block influences the final height in real-time.
-              Add or remove blocks if you are logged in. If the tower reaches
-              limit, it will explode!
+              This interactive section lets everyone add or remove blocks from a global tower. Each block influences the
+              final height in real-time. Add or remove blocks if you are logged in. If the tower reaches limit, it will
+              explode!
             </p>
             <div className="max-w-sm mx-auto bg-white p-6 rounded-md shadow-md">
-              <TowerVisualizer
-                towerHeight={towerHeight}
-                onResetTower={() => setTowerHeight(0)}
-              />
+              <TowerVisualizer towerHeight={towerHeight} onResetTower={() => setTowerHeight(0)} />
               <div className="flex justify-center gap-4 mt-4">
                 <Button
                   onClick={handleTowerIncrement}
@@ -557,11 +450,7 @@ export function Landing() {
                   Remove Block
                 </Button>
               </div>
-              {!userID && (
-                <p className="text-xs text-gray-500 mt-2">
-                  Please log in to interact with the tower.
-                </p>
-              )}
+              {!userID && <p className="text-xs text-gray-500 mt-2">Please log in to interact with the tower.</p>}
             </div>
           </div>
         </section>
@@ -599,10 +488,7 @@ export function Landing() {
             <Card className="max-w-lg mx-auto">
               <CardContent className="flex flex-col items-center justify-center gap-4 p-6 sm:p-8">
                 <div className="w-full text-left">
-                  <Label
-                    htmlFor="message"
-                    className="block mb-1 font-bold text-sm"
-                  >
+                  <Label htmlFor="message" className="block mb-1 font-bold text-sm">
                     Send me a message:
                   </Label>
                   <Textarea
@@ -622,10 +508,7 @@ export function Landing() {
                   {!userID ? "Login to Send Message" : "Send Message"}
                 </Button>
                 {!userID && (
-                  <Link
-                    href="/login"
-                    className="text-[#E33] hover:text-[#D22] text-xs"
-                  >
+                  <Link href="/login" className="text-[#E33] hover:text-[#D22] text-xs">
                     Click here to Login
                   </Link>
                 )}
@@ -640,27 +523,18 @@ export function Landing() {
         <div className="container mx-auto px-4 flex items-center justify-between text-sm">
           <p>© 2024 Igor. All rights reserved.</p>
           <div className="flex items-center space-x-3">
-            <Link
-              href="#about"
-              className="hover:text-[#E33] transition-colors duration-200"
-            >
+            <Link href="#about" className="hover:text-[#E33] transition-colors duration-200">
               About
             </Link>
-            <Link
-              href="#projects"
-              className="hover:text-[#E33] transition-colors duration-200"
-            >
+            <Link href="#projects" className="hover:text-[#E33] transition-colors duration-200">
               Projects
             </Link>
-            <Link
-              href="#contact"
-              className="hover:text-[#E33] transition-colors duration-200"
-            >
+            <Link href="#contact" className="hover:text-[#E33] transition-colors duration-200">
               Contact
             </Link>
           </div>
         </div>
       </footer>
     </div>
-  );
+  )
 }
