@@ -260,7 +260,7 @@ export function Landing() {
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
             Welcome to My Interactive CV!
           </h1>
-          <div className="mb-6 flex items-center justify-center space-x-4">
+          <div className="mb-6 hidden md:flex items-center justify-center space-x-4">
             <TerminalIcon className="h-6 w-6" />
             <TypingEffect />
           </div>

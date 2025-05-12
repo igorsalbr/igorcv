@@ -1,53 +1,59 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { MenuIcon, X } from "lucide-react"
-import { useAuth } from "@/hooks/use-auth"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { MenuIcon, X } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function Header() {
-  const [icon, setIcon] = useState(0)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { isAuthenticated, logout } = useAuth()
+  const [icon, setIcon] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIcon((prev) => (prev + 1) % 7)
-    }, 1200)
-    return () => clearInterval(interval)
-  }, [])
+      setIcon((prev) => (prev + 1) % 7);
+    }, 1200);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const menuItems = [
     { href: "/#about", label: "About" },
     { href: "/#projects", label: "Projects" },
     { href: "/#game", label: "Ping Pong" },
     { href: "/#contact", label: "Contact" },
-    { href: "/puzzles", label: "Puzzles" },
-  ]
+    { href: "/puzzles", label: "Puzzles" }
+  ];
 
   return (
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
-        scrolled ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md" : "bg-transparent",
+        scrolled
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md"
+          : "bg-transparent"
       )}
     >
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         {/* LEFT - LOGO */}
-        <Link href="/" prefetch={false} className="flex items-center space-x-2">
+        <Link
+          href="/"
+          prefetch={false}
+          className="hidden md:flex items-center space-x-2"
+        >
           <motion.div
             className="icon-container flex items-center ml-2"
             initial={{ opacity: 0, x: -20 }}
@@ -58,8 +64,28 @@ export function Header() {
               <motion.img
                 key={`icon-${icon}`}
                 className="w-14"
-                src={["go.png", "ts.png", "react.png", "py.png", "next.svg", "retool.png", "bubble.png"][icon]}
-                alt={["GO", "TypeScript", "React.js", "Python", "Next.js", "Retool", "Bubble"][icon]}
+                src={
+                  [
+                    "go.png",
+                    "ts.png",
+                    "react.png",
+                    "py.png",
+                    "next.svg",
+                    "retool.png",
+                    "bubble.png"
+                  ][icon]
+                }
+                alt={
+                  [
+                    "GO",
+                    "TypeScript",
+                    "React.js",
+                    "Python",
+                    "Next.js",
+                    "Retool",
+                    "Bubble"
+                  ][icon]
+                }
                 initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 exit={{ opacity: 0, scale: 0.8, rotate: 10 }}
@@ -185,8 +211,8 @@ export function Header() {
                   >
                     <button
                       onClick={() => {
-                        logout()
-                        setMenuOpen(false)
+                        logout();
+                        setMenuOpen(false);
                       }}
                       className="text-red-500 hover:text-red-700 transition-colors duration-200"
                     >
@@ -200,5 +226,5 @@ export function Header() {
         </AnimatePresence>
       </div>
     </header>
-  )
+  );
 }

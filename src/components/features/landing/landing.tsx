@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
-import { HeroSection } from "@/components/features/landing/hero-section"
-import { AboutSection } from "@/components/features/landing/about-section"
-import { ProjectsSection } from "@/components/features/landing/projects-section"
-import { GameSection } from "@/components/features/landing/game-section"
-import { PuzzleSection } from "@/components/features/landing/puzzle-section"
-import { TowerSection } from "@/components/features/landing/tower-section"
-import { ContactSection } from "@/components/features/landing/contact-section"
-import { pageTransition } from "@/lib/animations"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { HeroSection } from "@/components/features/landing/hero-section";
+import { AboutSection } from "@/components/features/landing/about-section";
+import { ProjectsSection } from "@/components/features/landing/projects-section";
+import { GameSection } from "@/components/features/landing/game-section";
+import { PuzzleSection } from "@/components/features/landing/puzzle-section";
+import { TowerSection } from "@/components/features/landing/tower-section";
+import { ContactSection } from "@/components/features/landing/contact-section";
+import { pageTransition } from "@/lib/animations";
 
 export function Landing() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 500)
-    return () => clearTimeout(timer)
-  }, [])
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence mode="wait">
@@ -36,7 +36,6 @@ export function Landing() {
         >
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 border-4 border-t-brand-primary border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin" />
-            <p className="mt-4 text-gray-600 dark:text-gray-300">Loading experience...</p>
           </div>
         </motion.div>
       ) : (
@@ -64,5 +63,5 @@ export function Landing() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
