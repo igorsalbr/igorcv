@@ -47,7 +47,7 @@ export function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <div className="container md:mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         {/* LEFT - LOGO */}
         <Link
           href="/"
@@ -150,7 +150,7 @@ export function Header() {
         </nav>
 
         {/* MOBILE MENU BUTTON */}
-        <div className="flex items-center md:hidden space-x-4">
+        <div className="flex justify-between items-center md:hidden space-x-4 w-full">
           <ThemeToggle />
           <motion.button
             onClick={() => setMenuOpen(!menuOpen)}
