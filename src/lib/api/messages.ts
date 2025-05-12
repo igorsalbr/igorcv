@@ -10,7 +10,7 @@ export async function sendMessage(message: string) {
 
   try {
     // Use the environment variable if we're calling an external API
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api/messages` : "/api/messages"
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/messages` : "/messages"
 
     const response = await fetch(apiUrl, {
       method: "POST",

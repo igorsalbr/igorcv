@@ -4,8 +4,8 @@ export async function login(email: string, password: string) {
   try {
     // Use the environment variable if we're calling an external API
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`
-      : "/api/auth/login"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/auth/login`
+      : "/auth/login"
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -39,8 +39,8 @@ export async function signup(name: string, email: string, password: string) {
   try {
     // Use the environment variable if we're calling an external API
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`
-      : "/api/auth/signup"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`
+      : "/auth/signup"
 
     const response = await fetch(apiUrl, {
       method: "POST",

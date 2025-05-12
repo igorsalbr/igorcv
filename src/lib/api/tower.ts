@@ -5,7 +5,7 @@ export async function getTowerHeight() {
     const token = localStorage.getItem("generalToken")
 
     // Use the environment variable if we're calling an external API
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api/tower` : "/api/tower"
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/tower` : "/tower"
 
     const response = await fetch(apiUrl, {
       headers: {
@@ -35,8 +35,8 @@ export async function incrementTower() {
   try {
     // Use the environment variable if we're calling an external API
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/tower/increment`
-      : "/api/tower/increment"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/tower/increment`
+      : "/tower/increment"
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -66,8 +66,8 @@ export async function decrementTower() {
   try {
     // Use the environment variable if we're calling an external API
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/tower/decrement`
-      : "/api/tower/decrement"
+      ? `${process.env.NEXT_PUBLIC_API_URL}/tower/decrement`
+      : "/tower/decrement"
 
     const response = await fetch(apiUrl, {
       method: "POST",

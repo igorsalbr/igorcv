@@ -5,7 +5,7 @@ export async function getPuzzles() {
     const token = localStorage.getItem("generalToken")
 
     // Use the environment variable if we're calling an external API
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api/puzzles` : "/api/puzzles"
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/puzzles` : "/puzzles"
 
     const response = await fetch(apiUrl, {
       headers: {
@@ -34,8 +34,8 @@ export async function updatePuzzleProgress(puzzleId: number, completed: boolean)
   try {
     // Use the environment variable if we're calling an external API
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/puzzles/${puzzleId}`
-      : `/api/puzzles/${puzzleId}`
+      ? `${process.env.NEXT_PUBLIC_API_URL}/puzzles/${puzzleId}`
+      : `/puzzles/${puzzleId}`
 
     const response = await fetch(apiUrl, {
       method: "PATCH",
