@@ -38,7 +38,75 @@ export default function PuzzlesPage() {
   const [openModal, setOpenModal] = useState<number | null>(null);
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
-  const [challenges, setChallenges] = useState<any[]>([]);
+  const [challenges, setChallenges] = useState<any[]>([
+    {
+      id: 1,
+      title: "API Call Challenge",
+      completed: false,
+      description:
+        "Make an API call to create or update a user with the parameter 'imanerd': true",
+      question: "What's the correct API endpoint to use?",
+      correctAnswer: "no api yet"
+    },
+    {
+      id: 2,
+      title: "Hidden Element Hunt",
+      completed: false,
+      description: "Find and interact with a hidden element on the page",
+      question: "What's the ID of the hidden element?",
+      correctAnswer: "salsal"
+    },
+    // {
+    //   id: 4,
+    //   title: "Invisible Button Clickathon",
+    //   completed: false,
+    //   description: "There are three invisible buttons on the page",
+    //   question: "In what order should the buttons be clicked? (123)",
+    //   correctAnswer: "213"
+    // },
+    {
+      id: 3,
+      title: "Console Hacker",
+      completed: false,
+      description: "Use the browser console to interact with a hidden function",
+      question: "What's the return value of the secretFunction()?",
+      correctAnswer: "h4ck3r"
+    },
+    {
+      id: 4,
+      title: "SQL Injection Simulation",
+      completed: false,
+      description:
+        "Simulate a SQL injection attack in a controlled environment",
+      question: "What input would you use to bypass the login?",
+      correctAnswer: "' OR '1'='1"
+    },
+    {
+      id: 5,
+      title: "Cryptography Challenge",
+      completed: false,
+      description: "Decrypt a message using a given cipher",
+      question: "Decrypt: Khoor Zruog! What's the original message?",
+      correctAnswer: "Hello World!"
+    },
+    // {
+    //   id: 6,
+    //   title: "RegEx Riddle",
+    //   completed: false,
+    //   description: "Create a regular expression to match a specific pattern",
+    //   question: "Write a RegEx to match all valid email addresses",
+    //   correctAnswer: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    // },
+    {
+      id: 6,
+      title: "JWT Decoder",
+      completed: false,
+      description: "Decode a JSON Web Token to find a hidden message",
+      question:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJzZWNyZXQiOiJvaWUifQ.55ja5RWqJJo4ZrsMDOxQXjWQhQsvgIx1AjTqFMbnJus",
+      correctAnswer: "oie"
+    }
+  ]);
   const [loading, setLoading] = useState(true);
 
   useExposeToWindow("secretFunction", secretFunction);
