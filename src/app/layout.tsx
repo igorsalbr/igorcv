@@ -68,6 +68,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Suspense>
             {children}
+            <SpeedInsights />
             <Analytics />
           </Suspense>
         </ThemeProvider>

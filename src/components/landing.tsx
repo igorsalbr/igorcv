@@ -64,7 +64,7 @@ export function Landing() {
       return;
     }
     try {
-      const response = await fetch(`${API_URL}/api/messages`, {
+      const response = await fetch(`${API_URL}/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
