@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { TerminalIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { TypingEffect } from "@/components/features/landing/typing-effect"
-import { fadeUpVariants, buttonHoverVariants } from "@/lib/animations"
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { TerminalIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TypingEffect } from "@/components/features/landing/typing-effect";
+import { fadeUpVariants, buttonHoverVariants } from "@/lib/animations";
 
 export function HeroSection() {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true)
-  }, [])
+    setIsLoaded(true);
+  }, []);
 
   return (
     <section className="relative overflow-hidden py-20 md:py-28">
@@ -24,25 +24,25 @@ export function HeroSection() {
           className="absolute -top-24 -right-24 w-96 h-96 bg-red-400/10 dark:bg-red-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.1, 1],
-            opacity: [0.5, 0.7, 0.5],
+            opacity: [0.5, 0.7, 0.5]
           }}
           transition={{
             duration: 8,
             repeat: Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
+            repeatType: "reverse"
           }}
         />
         <motion.div
           className="absolute -bottom-32 -left-32 w-96 h-96 bg-gray-400/10 dark:bg-gray-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.5, 0.7, 0.5],
+            opacity: [0.5, 0.7, 0.5]
           }}
           transition={{
             duration: 10,
             repeat: Number.POSITIVE_INFINITY,
             repeatType: "reverse",
-            delay: 1,
+            delay: 1
           }}
         />
       </div>
@@ -53,7 +53,7 @@ export function HeroSection() {
           animate={isLoaded ? "visible" : "hidden"}
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1 },
+            visible: { opacity: 1 }
           }}
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center"
@@ -66,7 +66,7 @@ export function HeroSection() {
               type: "spring",
               stiffness: 260,
               damping: 20,
-              delay: 0.2,
+              delay: 0.2
             }}
             className="relative mb-8"
           >
@@ -82,13 +82,16 @@ export function HeroSection() {
               transition={{
                 duration: 2,
                 repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
+                repeatType: "reverse"
               }}
             />
           </motion.div>
 
           {/* Heading */}
-          <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6" variants={fadeUpVariants}>
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6"
+            variants={fadeUpVariants}
+          >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-gray-900 dark:from-red-500 dark:to-gray-300">
               Welcome to My Interactive CV!
             </span>
@@ -96,7 +99,7 @@ export function HeroSection() {
 
           {/* Typing Effect */}
           <motion.div
-            className="mb-8 flex items-center justify-center space-x-4"
+            className="mb-8 hidden md:flex items-center justify-center space-x-4"
             variants={fadeUpVariants}
             transition={{ delay: 0.2 }}
           >
@@ -106,10 +109,19 @@ export function HeroSection() {
 
           {/* CTA Button */}
           <motion.div variants={fadeUpVariants} transition={{ delay: 0.4 }}>
-            <motion.div variants={buttonHoverVariants} initial="initial" whileHover="hover" whileTap="tap">
+            <motion.div
+              variants={buttonHoverVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+            >
               <Button
                 className="bg-black hover:bg-gray-700 dark:hover:bg-gray-700 text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() =>
+                  document
+                    .getElementById("about")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 <span>Check My Work</span>
                 <motion.span
@@ -118,7 +130,7 @@ export function HeroSection() {
                   transition={{
                     duration: 1.5,
                     repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
+                    repeatType: "reverse"
                   }}
                 >
                   →
@@ -129,5 +141,5 @@ export function HeroSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

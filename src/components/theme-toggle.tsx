@@ -21,7 +21,7 @@ export function ThemeToggle() {
       <Button
         variant="ghost"
         size="icon"
-        className="rounded-full"
+        className="rounded-full ml-auto md:ml-auto"
         aria-label="Toggle theme"
         disabled
       >
