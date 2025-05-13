@@ -44,8 +44,8 @@ export default function PuzzlesPage() {
       title: "API Call Challenge",
       completed: false,
       description:
-        "Make an API call to create or update a user with the parameter 'imanerd': true",
-      question: "What's the correct API endpoint to use?",
+        "Make an API call to create a user with the parameter 'imanerd': true",
+      question: "What's the imanerd returned value?",
       correctAnswer: "yes_you_are"
     },
     {

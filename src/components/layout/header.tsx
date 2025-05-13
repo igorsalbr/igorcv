@@ -30,6 +30,26 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) {
+      // Store the scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.overflowY = "scroll";
+      document.body.style.width = "100%";
+
+      // On cleanup or close menu: restore the scroll
+      return () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.overflowY = "";
+        document.body.style.width = "";
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [menuOpen]);
+
   const menuItems = [
     { href: "/#about", label: "About" },
     { href: "/#projects", label: "Projects" },
