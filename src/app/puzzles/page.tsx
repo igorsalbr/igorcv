@@ -162,7 +162,7 @@ export default function PuzzlesPage() {
     ) {
       try {
         if (openModal === null) return;
-        await updatePuzzleProgress(openModal, true);
+        //await updatePuzzleProgress(openModal, true);
 
         // Update local state
         const updatedChallenges = challenges.map((c) =>
