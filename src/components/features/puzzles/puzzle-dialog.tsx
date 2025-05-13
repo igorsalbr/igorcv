@@ -1,26 +1,41 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { motion, AnimatePresence } from "framer-motion"
-import { X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "@/components/ui/card";
 
 interface PuzzleDialogProps {
-  open: boolean
-  onClose: () => void
-  challenge: any
-  answer: string
-  error: string
-  onAnswerChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onSubmit: () => void
+  open: boolean;
+  onClose: () => void;
+  challenge: any;
+  answer: string;
+  error: string;
+  onAnswerChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
-export function PuzzleDialog({ open, onClose, challenge, answer, error, onAnswerChange, onSubmit }: PuzzleDialogProps) {
-  if (!open || !challenge) return null
+export function PuzzleDialog({
+  open,
+  onClose,
+  challenge,
+  answer,
+  error,
+  onAnswerChange,
+  onSubmit
+}: PuzzleDialogProps) {
+  if (!open || !challenge) return null;
 
   return (
     <AnimatePresence>
@@ -43,18 +58,27 @@ export function PuzzleDialog({ open, onClose, challenge, answer, error, onAnswer
           >
             <Card className="w-full max-w-lg bg-white dark:bg-gray-800 shadow-xl">
               <CardHeader className="relative">
-                <Button variant="ghost" size="icon" className="absolute right-2 top-2" onClick={onClose}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-2 top-2"
+                  onClick={onClose}
+                >
                   <X className="h-4 w-4" />
                   <span className="sr-only">Close</span>
                 </Button>
                 <CardTitle>{challenge.title}</CardTitle>
-                <CardDescription>{challenge.description}</CardDescription>
+                <CardDescription className="max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
+                  {challenge.description}
+                </CardDescription>
               </CardHeader>
 
               <CardContent>
                 <div className="space-y-4">
                   <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                    <p className="text-gray-700 dark:text-gray-300">{challenge.question}</p>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      {challenge.question}
+                    </p>
                   </div>
 
                   <div className="space-y-2">
@@ -96,5 +120,5 @@ export function PuzzleDialog({ open, onClose, challenge, answer, error, onAnswer
         </>
       )}
     </AnimatePresence>
-  )
+  );
 }
