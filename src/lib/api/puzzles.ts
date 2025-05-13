@@ -34,7 +34,7 @@ export async function updatePuzzleProgress(puzzleId: number, completed: boolean)
   try {
     // Use the environment variable if we're calling an external API
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-      ? `${process.env.NEXT_PUBLIC_API_URL}/puzzles/${puzzleId}`
+      ? `${process.env.NEXT_PUBLIC_API_URL}/users/puzzles-completed/${puzzleId}`
       : `/puzzles/${puzzleId}`
 
     const response = await fetch(apiUrl, {
